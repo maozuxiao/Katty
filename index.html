@@ -193,7 +193,22 @@
       }
     }
 
-    function createCard(file, title) {
+    async function getUploadDate(file) {
+      try {
+        const path = encodeURIComponent(file.path);
+        const response = await fetch(`https://api.github.com/repos/${REPOSITORY}/commits?path=${path}&per_page=1`, {
+          headers: { Accept: 'application/vnd.github+json' }
+        });
+        if (!response.ok) return null;
+        const commits = await response.json();
+        const commit = commits[0]?.commit;
+        return commit?.committer?.date || commit?.author?.date || null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function createCard(file, title, uploadDate) {
       const isHtml = /\.html?$/i.test(file.name);
       const card = document.createElement('a');
       card.className = 'doc-card';
@@ -206,7 +221,7 @@
           <span class="doc-arrow" aria-hidden="true">↗</span>
         </span>
         <h3 class="doc-title"></h3>
-        <span class="doc-meta">${formatDate(file.updated_at)}</span>`;
+        <span class="doc-meta">上传于 ${formatDate(uploadDate)}</span>`;
       card.querySelector('.doc-title').textContent = title;
       return card;
     }
@@ -216,13 +231,18 @@
         const response = await fetch(DOCS_API, { headers: { Accept: 'application/vnd.github+json' } });
         if (!response.ok) throw new Error('docs unavailable');
         const files = (await response.json())
-          .filter(file => file.type === 'file' && /\.(html?|md)$/i.test(file.name))
-          .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+          .filter(file => file.type === 'file' && /\.(html?|md)$/i.test(file.name));
         loading.hidden = true;
         if (!files.length) { empty.hidden = false; count.textContent = '0 篇文档'; return; }
         count.textContent = `${files.length} 篇文档，随时可以出发`;
-        const titles = await Promise.all(files.map(getTitle));
-        files.forEach((file, index) => grid.appendChild(createCard(file, titles[index])));
+        const [titles, uploadDates] = await Promise.all([
+          Promise.all(files.map(getTitle)),
+          Promise.all(files.map(getUploadDate))
+        ]);
+        files
+          .map((file, index) => ({ file, title: titles[index], uploadDate: uploadDates[index] }))
+          .sort((a, b) => new Date(b.uploadDate || 0) - new Date(a.uploadDate || 0))
+          .forEach(item => grid.appendChild(createCard(item.file, item.title, item.uploadDate)));
       } catch (_) {
         loading.hidden = true;
         error.hidden = false;
