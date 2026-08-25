@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蛙泳 3 周训练打卡表</title>
+<style>
+  :root{
+    --bg:#0f1b2d; --card:#16263d; --ink:#e8eef6; --muted:#9fb3c8;
+    --accent:#39c0ed; --accent2:#ffce54; --ok:#4cd97b; --line:#27405e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,#0c1626,#0f1b2d);color:var(--ink);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;
+    line-height:1.6;padding:28px 14px 70px;}
+  .wrap{max-width:860px;margin:0 auto;}
+  header{text-align:center;margin-bottom:18px;}
+  header h1{font-size:23px;margin:0 0 4px;}
+  header p{color:var(--muted);margin:0;font-size:13px;}
+
+  /* 总进度 */
+  .progress{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 20px;margin:16px 0;position:sticky;top:0;z-index:5;
+    box-shadow:0 4px 16px rgba(0,0,0,.35);}
+  .pbar{height:14px;background:var(--bg);border-radius:20px;overflow:hidden;margin-top:8px;border:1px solid var(--line);}
+  .pfill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--ok));transition:width .35s;}
+  .pnum{display:flex;justify-content:space-between;font-size:14px;margin-top:6px;}
+  .pnum b{color:var(--ok);font-size:16px;}
+
+  .week{margin:22px 0 6px;font-size:17px;color:var(--accent2);font-weight:700;
+    border-left:4px solid var(--accent2);padding-left:10px;}
+  .sub{color:var(--muted);font-size:13px;font-weight:400;margin-left:8px;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;margin:12px 0;transition:.2s;}
+  .card.done{border-color:var(--ok);background:rgba(76,217,123,.08);}
+  .top{display:flex;align-items:flex-start;gap:12px;}
+  .chk{appearance:none;width:24px;height:24px;min-width:24px;border:2px solid var(--accent);
+    border-radius:7px;cursor:pointer;position:relative;margin-top:2px;background:var(--bg);}
+  .chk:checked{background:var(--ok);border-color:var(--ok);}
+  .chk:checked::after{content:"✓";color:#06283d;font-size:16px;font-weight:900;
+    position:absolute;left:4px;top:-1px;}
+  .meta{flex:1;}
+  .date{font-weight:700;font-size:15px;}
+  .date .tag{font-size:11px;padding:1px 7px;border-radius:12px;margin-left:6px;vertical-align:middle;}
+  .tag.eve{background:rgba(57,192,237,.18);color:var(--accent);}
+  .tag.long{background:rgba(255,206,84,.20);color:var(--accent2);}
+  .theme{color:var(--muted);font-size:13px;margin-top:1px;}
+  ul.tasks{margin:10px 0 6px 4px;padding-left:18px;font-size:14px;}
+  ul.tasks li{margin:3px 0;color:#cfe0f0;}
+  textarea{width:100%;margin-top:8px;background:var(--bg);color:var(--ink);
+    border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;
+    font-family:inherit;resize:vertical;min-height:38px;}
+  textarea:focus{outline:none;border-color:var(--accent);}
+  .card.done textarea{border-color:rgba(76,217,123,.4);}
+
+  .toolbar{text-align:center;margin:22px 0 0;}
+  .btn{background:transparent;color:var(--muted);border:1px solid var(--line);
+    border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;font-family:inherit;}
+  .btn:hover{color:var(--danger);border-color:var(--danger);}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:24px;}
+
+  @media print{
+    body{background:#fff;color:#111;padding:0;}
+    .card,.progress{box-shadow:none;background:#fff;border:1px solid #bbb;}
+    .progress{position:static;}
+    .chk{border-color:#333;}
+    .toolbar{display:none;}
+    .pbar{background:#eee;}
+    .date .tag.eve{background:#e6f4fb;color:#036;}
+    .date .tag.long{background:#fff4d6;color:#7a5b00;}
+    textarea{border:1px solid #999;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>🐸 蛙泳 3 周训练打卡表</h1>
+  <p>闭馆前冲刺 ｜ 8/25 → 约 9/15 ｜ 勾选完成自动保存，可打印携带</p>
+</header>
+
+<div class="progress">
+  <div class="pnum"><span>总进度</span><span><b id="cnt">0</b> / 12 次完成（<span id="pct">0</span>%）</span></div>
+  <div class="pbar"><div class="pfill" id="pfill"></div></div>
+</div>
+
+<div id="board"></div>
+
+<div class="toolbar">
+  <button class="btn" id="reset">清空打卡记录</button>
+</div>
+
+<footer>数据仅保存在本机浏览器，换设备或清缓存会丢失；建议每周截图或打印备份。</footer>
+</div>
+
+<script>
+const SESSIONS = [
+  {w:1, sub:"腿专项：解决不走水", items:[
+    {id:"w1d1", date:"8/25 周二", tag:"晚", theme:"腿基础",
+      tasks:["陆上勾脚外翻模仿 20 次","扶边蹬腿 10 次（体会翻脚）","浮板蹬腿 8×25m（窄收腿/翻脚/蹬完滑行 2s）","垂直蛙泳蹬腿 3×20s"]},
+    {id:"w1d2", date:"8/27 周四", tag:"晚", theme:"不走水纠正",
+      tasks:["浮板蹬腿 10×25m（慢做，体会脚掌对水向后下方蹬）","池边蹬腿滑行 5 次（松手漂 2–3m）","抬头蛙 4×25m"]},
+    {id:"w1d3", date:"8/29 周六", tag:"长课", theme:"腿量 + 连贯雏形",
+      tasks:["浮板蹬腿 12×25m","垂直蹬腿 5×20s","完整配合『腿主导』4×25m（换气后立刻低头蹬腿）"]},
+    {id:"w1d4", date:"8/30 周日", tag:"", theme:"巩固腿",
+      tasks:["浮板蹬腿 8×25m","完整配合 4×25m（换完气马上低头蹬腿，不断拍）"]},
+  ]},
+  {w:2, sub:"低头蹬腿连贯 + 配合", items:[
+    {id:"w2d1", date:"9/1 周二", tag:"晚", theme:"配合A",
+      tasks:["分解配合（单臂前伸 + 蹬腿）4×25m","完整配合 6×25m（划手抬头吸→低头蹬腿→滑行，不沉）"]},
+    {id:"w2d2", date:"9/3 周四", tag:"晚", theme:"配合B",
+      tasks:["完整配合 10×25m","若仍沉，刻意练『头一入水立刻蹬腿』单动作 5 次再配合"]},
+    {id:"w2d3", date:"9/5 周六", tag:"长课", theme:"连续推进",
+      tasks:["配合 6×25m","试连续 50m×2（应已较稳）"]},
+    {id:"w2d4", date:"9/6 周日", tag:"", theme:"巩固",
+      tasks:["配合 8×25m","连续 50m×1","放松游"]},
+  ]},
+  {w:3, sub:"距离 + 定型 + 延伸", items:[
+    {id:"w3d1", date:"9/8 周二", tag:"晚", theme:"连续A",
+      tasks:["连续 50m×4（节奏优先）","100m×1"]},
+    {id:"w3d2", date:"9/10 周四", tag:"晚", theme:"连续B",
+      tasks:["连续 100m×2","50m×2"]},
+    {id:"w3d3", date:"9/12 周六", tag:"长课", theme:"定型 + 延伸",
+      tasks:["100m×3，固定个人节奏","状态好加 25m 自由泳脱蹼（回归大目标试水）"]},
+    {id:"w3d4", date:"9/13 周日", tag:"毕业", theme:"闭馆前测试",
+      tasks:["热身","正式测：连续 50m 协调换气","挑战 100–200m","庆祝游 + 聊后续维持"]},
+  ]},
+];
+
+const KEY = "breaststroke_checkin_v1";
+let state = {};
+try { state = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ state = {}; }
+
+function save(){ localStorage.setItem(KEY, JSON.stringify(state)); }
+
+const board = document.getElementById("board");
+SESSIONS.forEach(group=>{
+  const h = document.createElement("div");
+  h.className = "week";
+  h.innerHTML = `第 ${group.w} 周<span class="sub">${group.sub}</span>`;
+  board.appendChild(h);
+  group.items.forEach(s=>{
+    const st = state[s.id] || {done:false, note:""};
+    const card = document.createElement("div");
+    card.className = "card" + (st.done ? " done":"");
+    const tagHtml = s.tag ? `<span class="tag ${s.tag==='长课'||s.tag==='毕业'?'long':'eve'}">${s.tag}</span>` : "";
+    card.innerHTML = `
+      <div class="top">
+        <input type="checkbox" class="chk" ${st.done?"checked":""}>
+        <div class="meta">
+          <div class="date">${s.date}${tagHtml}</div>
+          <div class="theme">${s.theme}</div>
+        </div>
+      </div>
+      <ul class="tasks">${s.tasks.map(t=>`<li>${t}</li>`).join("")}</ul>
+      <textarea placeholder="训练笔记（翻脚有感觉了 / 哪里还沉 / 配速…）">${st.note||""}</textarea>
+    `;
+    const chk = card.querySelector(".chk");
+    const ta = card.querySelector("textarea");
+    chk.addEventListener("change", ()=>{
+      state[s.id] = state[s.id] || {};
+      state[s.id].done = chk.checked;
+      state[s.id].note = ta.value;
+      card.classList.toggle("done", chk.checked);
+      save(); updateProgress();
+    });
+    ta.addEventListener("input", ()=>{
+      state[s.id] = state[s.id] || {};
+      state[s.id].done = chk.checked;
+      state[s.id].note = ta.value;
+      save();
+    });
+    board.appendChild(card);
+  });
+});
+
+function updateProgress(){
+  const total = SESSIONS.reduce((a,g)=>a+g.items.length,0);
+  const done = SESSIONS.reduce((a,g)=>a+g.items.filter(s=>state[s.id]&&state[s.id].done).length,0);
+  document.getElementById("cnt").textContent = done;
+  const pct = Math.round(done/total*100);
+  document.getElementById("pct").textContent = pct;
+  document.getElementById("pfill").style.width = pct + "%";
+}
+updateProgress();
+
+document.getElementById("reset").addEventListener("click", ()=>{
+  if(confirm("确定清空所有打卡记录？此操作不可恢复。")){
+    state = {}; save();
+    document.querySelectorAll(".chk").forEach(c=>c.checked=false);
+    document.querySelectorAll(".card").forEach(c=>c.classList.remove("done"));
+    document.querySelectorAll("textarea").forEach(t=>t.value="");
+    updateProgress();
+  }
+});
+</script>
+</body>
+</html>

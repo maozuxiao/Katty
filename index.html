@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Katty 的个人博客与文档岛屿">
+  <title>Katty · 文档岛屿</title>
+  <style>
+    :root {
+      --ink: #173b4b;
+      --muted: #5b7b84;
+      --cream: #fff9e9;
+      --paper: #fffdf5;
+      --sky: #bde8e2;
+      --sky-deep: #85c9c7;
+      --leaf: #6ba77b;
+      --leaf-dark: #3f795e;
+      --sun: #f7c56f;
+      --coral: #ee8f76;
+      --line: rgba(23, 59, 75, .14);
+      --shadow: 0 18px 45px rgba(48, 100, 105, .16);
+      color: var(--ink);
+      background: var(--sky);
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-synthesis: none;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; background: var(--sky); }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 4px; }
+
+    .page-shell { overflow: hidden; min-height: 100vh; }
+    .topbar {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; letter-spacing: .02em; }
+    .brand-mark { display: grid; place-items: center; width: 42px; height: 42px; border: 3px solid var(--ink); border-radius: 46% 54% 48% 52%; background: var(--sun); transform: rotate(-7deg); box-shadow: 3px 4px 0 rgba(23, 59, 75, .15); }
+    .brand-mark::before { content: ""; width: 17px; height: 11px; border: 3px solid var(--ink); border-top: 0; border-radius: 0 0 13px 13px; transform: translateY(-2px); }
+    .brand-name { font-size: 1.22rem; }
+    .date-chip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 2px solid rgba(23,59,75,.16); border-radius: 999px; background: rgba(255,253,245,.54); color: var(--leaf-dark); font-size: .82rem; font-weight: 700; }
+    .date-chip::before { content: "✦"; color: var(--coral); }
+
+    .hero { width: min(1160px, calc(100% - 40px)); margin: 0 auto; min-height: 430px; display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 40px; position: relative; }
+    .hero-copy { padding: 56px 0 72px; position: relative; z-index: 1; }
+    .eyebrow { margin: 0 0 20px; color: var(--leaf-dark); font-size: .8rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { max-width: 650px; margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(3.4rem, 8vw, 6.6rem); line-height: .9; letter-spacing: -.07em; font-weight: 700; }
+    h1 em { color: var(--coral); font-style: normal; }
+    .hero-lede { max-width: 500px; margin: 28px 0 0; color: var(--muted); font-size: 1.08rem; line-height: 1.8; }
+    .hero-art { align-self: stretch; min-height: 350px; position: relative; }
+    .sun { position: absolute; top: 52px; right: 12%; width: 120px; height: 120px; border-radius: 50%; background: var(--sun); box-shadow: 0 0 0 17px rgba(247,197,111,.18), 0 0 0 34px rgba(247,197,111,.1); }
+    .cloud { position: absolute; width: 120px; height: 28px; border-radius: 30px; background: rgba(255,253,245,.66); }
+    .cloud::before, .cloud::after { content: ""; position: absolute; bottom: 0; border-radius: 50%; background: inherit; }
+    .cloud::before { left: 20px; width: 48px; height: 48px; }
+    .cloud::after { left: 60px; width: 35px; height: 35px; }
+    .cloud.one { top: 82px; left: 7%; transform: scale(.7); }
+    .cloud.two { top: 190px; right: -2%; transform: scale(.52); opacity: .65; }
+    .island { position: absolute; bottom: 34px; left: 9%; width: 82%; height: 128px; border-radius: 50% 50% 45% 45%; background: #9bcf8e; box-shadow: inset 0 -16px 0 #75ad78, 0 17px 0 rgba(23,59,75,.1); transform: rotate(-3deg); }
+    .island::before { content: ""; position: absolute; right: 22%; top: -80px; width: 22px; height: 100px; border-radius: 50% 50% 10px 10px; background: var(--leaf-dark); transform: rotate(22deg); box-shadow: -27px 28px 0 -4px var(--leaf), 25px 15px 0 -3px var(--leaf); }
+    .island::after { content: ""; position: absolute; left: 14%; top: -15px; width: 70px; height: 21px; border-radius: 50%; background: #f3db9b; box-shadow: 120px 18px 0 -3px #f3db9b, 220px -11px 0 -5px #f3db9b; }
+    .shell { position: absolute; bottom: 45px; right: 25%; width: 24px; height: 17px; border: 3px solid var(--coral); border-radius: 50% 50% 45% 45%; transform: rotate(18deg); }
+
+    .content { position: relative; padding: 66px 0 90px; background: var(--cream); }
+    .content::before { content: ""; position: absolute; top: -32px; left: -3%; width: 106%; height: 55px; background: var(--cream); border-radius: 50% 50% 0 0 / 100% 100% 0 0; }
+    .content-inner { width: min(1160px, calc(100% - 40px)); margin: 0 auto; position: relative; z-index: 1; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 26px; }
+    .section-heading h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -.05em; }
+    .section-note { margin: 0; color: var(--muted); font-size: .9rem; }
+    .doc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .doc-card { min-height: 218px; display: flex; flex-direction: column; padding: 24px; border: 2px solid var(--line); border-radius: 24px 24px 20px 20px; background: var(--paper); text-decoration: none; box-shadow: 0 8px 0 rgba(107,167,123,.16); transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+    .doc-card:hover { transform: translateY(-6px) rotate(-.5deg); border-color: var(--sky-deep); box-shadow: var(--shadow); }
+    .doc-topline { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+    .doc-type { display: inline-flex; align-items: center; gap: 7px; color: var(--leaf-dark); font-size: .74rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .doc-type::before { content: ""; display: block; width: 13px; height: 13px; border-radius: 4px; background: var(--sun); transform: rotate(12deg); }
+    .doc-type.html::before { background: var(--coral); }
+    .doc-arrow { color: var(--coral); font-size: 1.35rem; }
+    .doc-title { margin: 0; font-size: 1.22rem; line-height: 1.35; overflow-wrap: anywhere; }
+    .doc-meta { display: flex; align-items: center; gap: 7px; margin-top: auto; padding-top: 24px; color: var(--muted); font-size: .78rem; }
+    .doc-meta::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--sky-deep); }
+    .state { padding: 36px 20px; border: 2px dashed var(--line); border-radius: 24px; color: var(--muted); text-align: center; }
+    .state[hidden] { display: none; }
+    .footer { width: min(1160px, calc(100% - 40px)); margin: 0 auto; padding: 25px 0; color: var(--muted); font-size: .78rem; text-align: center; }
+    .footer a { color: var(--leaf-dark); font-weight: 700; }
+
+    @media (max-width: 760px) {
+      .topbar, .hero, .content-inner, .footer { width: min(100% - 28px, 560px); }
+      .topbar { padding-top: 16px; }
+      .date-chip { padding: 8px 10px; font-size: .72rem; }
+      .hero { display: block; min-height: 560px; }
+      .hero-copy { padding: 54px 0 0; }
+      h1 { font-size: clamp(3.4rem, 18vw, 5.4rem); }
+      .hero-art { min-height: 270px; }
+      .sun { top: 32px; right: 13%; width: 82px; height: 82px; }
+      .island { bottom: 26px; left: 1%; width: 98%; }
+      .content { padding-top: 52px; }
+      .section-heading { display: block; }
+      .section-note { margin-top: 8px; }
+      .doc-grid { grid-template-columns: 1fr; gap: 16px; }
+      .doc-card { min-height: 190px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="返回 Katty 首页">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Katty / journal</span>
+      </a>
+      <time class="date-chip" id="today" aria-label="今天的日期"></time>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">notes from a little island</p>
+          <h1 id="page-title">你好，<em>这里是</em><br>Katty。</h1>
+          <p class="hero-lede">把想法、记录和正在学习的事情，放在岛上的小屋里。挑一张卡片，开始一次轻松的阅读。</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="sun"></div>
+          <div class="cloud one"></div>
+          <div class="cloud two"></div>
+          <div class="island"></div>
+          <div class="shell"></div>
+        </div>
+      </section>
+
+      <section class="content" id="documents" aria-labelledby="documents-title">
+        <div class="content-inner">
+          <div class="section-heading">
+            <h2 id="documents-title">岛上文档</h2>
+            <p class="section-note" id="document-count">正在寻找你的下一篇阅读…</p>
+          </div>
+          <div class="state" id="loading">正在从岛屿仓库取回文档…</div>
+          <div class="state" id="empty" hidden>这里还没有文档。把 `.html` 或 `.md` 文件放进 `docs/`，它们会在下一次加载时出现。</div>
+          <div class="state" id="error" hidden>暂时无法读取 `docs/`。请确认仓库已发布，或使用本地 HTTP 服务打开页面。</div>
+          <div class="doc-grid" id="doc-grid"></div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">made for slow mornings · <a href="https://github.com/maozuxiao/Katty" target="_blank" rel="noreferrer">view on GitHub</a></footer>
+  </div>
+
+  <script>
+    const REPOSITORY = 'maozuxiao/Katty';
+    const DOCS_API = `https://api.github.com/repos/${REPOSITORY}/contents/docs`;
+    const grid = document.querySelector('#doc-grid');
+    const loading = document.querySelector('#loading');
+    const empty = document.querySelector('#empty');
+    const error = document.querySelector('#error');
+    const count = document.querySelector('#document-count');
+
+    document.querySelector('#today').textContent = new Intl.DateTimeFormat('zh-CN', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    }).format(new Date());
+
+    function formatDate(value) {
+      if (!value) return '日期未知';
+      return new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(value));
+    }
+
+    function fallbackTitle(name) {
+      return name.replace(/\.(html?|md)$/i, '').replace(/[-_]+/g, ' ').replace(/\b\w/g, letter => letter.toUpperCase());
+    }
+
+    async function getTitle(file) {
+      const title = fallbackTitle(file.name);
+      try {
+        const response = await fetch(file.download_url);
+        if (!response.ok) return title;
+        const text = await response.text();
+        if (/\.html?$/i.test(file.name)) {
+          const match = text.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+          return match ? match[1].replace(/\s+/g, ' ').trim() || title : title;
+        }
+        const match = text.match(/^#{1,2}\s+(.+)$/m);
+        return match ? match[1].replace(/[*_`]/g, '').trim() || title : title;
+      } catch (_) {
+        return title;
+      }
+    }
+
+    function createCard(file, title) {
+      const isHtml = /\.html?$/i.test(file.name);
+      const card = document.createElement('a');
+      card.className = 'doc-card';
+      card.href = isHtml ? `./${file.path}` : file.html_url;
+      card.target = '_blank';
+      card.rel = 'noreferrer';
+      card.innerHTML = `
+        <span class="doc-topline">
+          <span class="doc-type ${isHtml ? 'html' : ''}">${isHtml ? 'HTML page' : 'Markdown note'}</span>
+          <span class="doc-arrow" aria-hidden="true">↗</span>
+        </span>
+        <h3 class="doc-title"></h3>
+        <span class="doc-meta">${formatDate(file.updated_at)}</span>`;
+      card.querySelector('.doc-title').textContent = title;
+      return card;
+    }
+
+    async function loadDocuments() {
+      try {
+        const response = await fetch(DOCS_API, { headers: { Accept: 'application/vnd.github+json' } });
+        if (!response.ok) throw new Error('docs unavailable');
+        const files = (await response.json())
+          .filter(file => file.type === 'file' && /\.(html?|md)$/i.test(file.name))
+          .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+        loading.hidden = true;
+        if (!files.length) { empty.hidden = false; count.textContent = '0 篇文档'; return; }
+        count.textContent = `${files.length} 篇文档，随时可以出发`;
+        const titles = await Promise.all(files.map(getTitle));
+        files.forEach((file, index) => grid.appendChild(createCard(file, titles[index])));
+      } catch (_) {
+        loading.hidden = true;
+        error.hidden = false;
+        count.textContent = '文档岛暂时离线';
+      }
+    }
+
+    loadDocuments();
+  </script>
+</body>
+</html>

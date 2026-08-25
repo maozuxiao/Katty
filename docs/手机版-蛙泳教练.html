@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>蛙泳教练 · 手机版</title>
+<style>
+  :root{
+    --bg:#0d1626; --card:#15243a; --ink:#eaf1f8; --muted:#9fb3c8;
+    --accent:#39c0ed; --accent2:#ffce54; --ok:#4cd97b; --line:#2a4261;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;
+    line-height:1.65;padding:0 0 40px;}
+  .bar{position:sticky;top:0;z-index:10;background:rgba(13,22,38,.96);
+    backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
+    padding:12px 16px;display:flex;align-items:center;justify-content:space-between;}
+  .bar .t{font-weight:800;font-size:16px;}
+  .bar .chip{font-size:13px;color:var(--ok);background:rgba(76,217,123,.12);
+    border:1px solid rgba(76,217,123,.4);border-radius:20px;padding:3px 11px;}
+  .wrap{padding:14px 14px 0;max-width:640px;margin:0 auto;}
+  .hero{background:linear-gradient(135deg,rgba(57,192,237,.20),rgba(76,217,123,.12));
+    border:1px solid var(--accent);border-radius:14px;padding:14px 16px;margin-bottom:14px;}
+  .hero .d{font-size:18px;font-weight:800;}
+  .hero .s{color:var(--accent2);font-size:14px;margin-top:2px;}
+  h2{font-size:17px;margin:18px 4px 10px;color:var(--accent);}
+  .goal{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:12px 14px;margin:10px 0;}
+  .goal.done{border-color:var(--ok);background:rgba(76,217,123,.10);}
+  .glabel{display:flex;align-items:flex-start;gap:11px;font-size:16px;}
+  .box{width:24px;height:24px;min-width:24px;border:2px solid var(--accent);border-radius:7px;
+    margin-top:1px;display:flex;align-items:center;justify-content:center;font-weight:900;color:transparent;}
+  .goal.done .box{background:var(--ok);border-color:var(--ok);color:#06283d;}
+  .goal.done .gtxt{color:var(--muted);text-decoration:line-through;}
+  .gtxt b{color:#fff;}
+  .det{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;}
+  .det summary{padding:13px 16px;font-size:16px;font-weight:700;color:var(--accent2);
+    list-style:none;display:flex;justify-content:space-between;align-items:center;}
+  .det summary::-webkit-details-marker{display:none;}
+  .det summary:after{content:"▾";color:var(--muted);font-size:14px;transition:.2s;}
+  .det[open] summary:after{transform:rotate(180deg);}
+  .det .body{padding:0 16px 14px;font-size:15px;}
+  .det .body p{margin:8px 0;}
+  .kv{display:flex;gap:8px;margin:7px 0;font-size:14px;}
+  .kv .k{min-width:54px;color:var(--accent);font-weight:700;flex-shrink:0;}
+  .kv .v{color:#cfe0f0;}
+  .anchor{background:rgba(255,206,84,.08);border:1px solid rgba(255,206,84,.4);
+    border-radius:12px;padding:13px 15px;margin:12px 0;font-size:15px;}
+  .report{background:rgba(57,192,237,.07);border:1px solid rgba(57,192,237,.35);
+    border-radius:12px;padding:13px 15px;margin:12px 0;}
+  .report h3{color:var(--accent);margin:0 0 8px;font-size:15px;}
+  .report ol{margin:6px 0;padding-left:20px;font-size:15px;}
+  .report li{margin:5px 0;}
+  .tip{color:var(--muted);font-size:13px;margin-top:8px;}
+  details > summary{outline:none;}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="t">🐸 蛙泳教练</div>
+  <div class="chip" id="chip">今日 0/5</div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="d">8/25 周二 晚 · 腿基础</div>
+    <div class="s">今天只盯一件事：让腿「吃住水」——翻脚 + 蹬夹方向</div>
+  </div>
+
+  <h2>🎯 今日 5 个体感目标（点一下勾）</h2>
+
+  <div class="goal" data-id="g1">
+    <div class="glabel"><div class="box">✓</div>
+      <div class="gtxt"><b>① 翻脚做不做得出</b><br>
+      做：收腿末段脚踝外翻、脚尖外勾，脚掌像蛙掌扣住身后水。<br>
+      <span style="color:var(--ok)">进步：</span>能主动做出并说清「脚掌朝后下方」，不是脚尖朝下蹬空。<br>
+      <span style="color:var(--accent2)">回来告诉我：</span>翻脚是自然就有，还是有意识才做得出？</div></div>
+  </div>
+
+  <div class="goal" data-id="g2">
+    <div class="glabel"><div class="box">✓</div>
+      <div class="gtxt"><b>② 蹬腿有没有推进感</b><br>
+      做：扶板蹬腿 25m，闭眼感受每次蹬夹身体被推出一截。<br>
+      <span style="color:var(--ok)">进步：</span>不靠手划，光腿能把你往前送；一次半米也算。<br>
+      <span style="color:var(--accent2)">回来告诉我：</span>推进感强/弱/几乎没有？哪条腿更走水？</div></div>
+  </div>
+
+  <div class="goal" data-id="g3">
+    <div class="glabel"><div class="box">✓</div>
+      <div class="gtxt"><b>③ 滑行能不能拉出来</b><br>
+      做：蹬完并腿伸直，数「1–2」再划下一次。<br>
+      <span style="color:var(--ok)">进步：</span>滑行段身体平、不沉，比刚下水滑得远。<br>
+      <span style="color:var(--accent2)">回来告诉我：</span>蹬完能滑几秒？滑时沉不沉？</div></div>
+  </div>
+
+  <div class="goal" data-id="g4">
+    <div class="glabel"><div class="box">✓</div>
+      <div class="gtxt"><b>④ 累对地方没</b><br>
+      做：留意疲劳位置。<br>
+      <span style="color:var(--ok)">进步：</span>累在小腿后侧/脚踝外侧（翻脚发力处），不是大腿乱抡的累。<br>
+      <span style="color:var(--accent2)">回来告诉我：</span>今天腿累在哪儿？</div></div>
+  </div>
+
+  <div class="goal" data-id="g5">
+    <div class="glabel"><div class="box">✓</div>
+      <div class="gtxt"><b>⑤ 垂直蹬腿浮不浮得住</b><br>
+      做：浅水垂直，只蹬腿、手轻拨，看能否靠腿浮住不沉。<br>
+      <span style="color:var(--ok)">进步：</span>20 秒内腿成主要支撑，不靠手忙划。<br>
+      <span style="color:var(--accent2)">回来告诉我：</span>垂直蹬腿能不能浮住？</div></div>
+  </div>
+
+  <div class="anchor">
+    <b>🔑 对比锚点（今天实打实进步的证据）</b><br>
+    下水前先「不翻脚、随便蹬」25m，记多远、多费劲（基准）。练完再用翻脚蹬 25m——同样发力，游后更远/更省力 = 今天确实进步了。
+  </div>
+
+  <h2>📚 技术小抄（点开看）</h2>
+
+  <details class="det">
+    <summary>收翻蹬夹 是什么（4 步）</summary>
+    <div class="body">
+      <div class="kv"><span class="k">收</span><span class="v">脚跟向臀部收，膝间距不超过肩宽（窄收）</span></div>
+      <div class="kv"><span class="k">翻</span><span class="v">脚踝外翻、脚尖外勾，脚掌像蛙掌扣住身后水</span></div>
+      <div class="kv"><span class="k">蹬</span><span class="v">脚掌对水向后下方蹬出（不是向外踢）</span></div>
+      <div class="kv"><span class="k">夹</span><span class="v">快速并拢双腿，蹬完伸直滑行 1–2 秒</span></div>
+    </div>
+  </details>
+
+  <details class="det">
+    <summary>不走水 → 翻脚 + 蹬夹方向</summary>
+    <div class="body">
+      <p><b>翻脚</b>：收腿末脚尖外勾、脚掌对准后方水面——这是走水关键。错：脚尖朝下/朝内，蹬空。</p>
+      <p><b>窄收腿</b>：膝不超肩宽。错：膝盖分太开，蹬不到水。</p>
+      <p><b>蹬夹</b>：脚掌对水向后下方蹬出，再夹拢并腿。错：只向外踢不夹，无推进。</p>
+      <p><b>滑行</b>：蹬完并腿伸直滑 1–2 秒。错：连着划，最费力。</p>
+    </div>
+  </details>
+
+  <details class="det">
+    <summary>低头蹬腿连贯（换完气不沉）</summary>
+    <div class="body">
+      <p><b>问题</b>：抬头换气时屁股下掉，换气后停顿再蹬，已下沉。</p>
+      <p><b>纠正</b>：换气（头抬）→ <b>头一入水立刻蹬腿</b>，两件事是一拍、不能断。</p>
+      <p><b>节奏</b>：划手抬头吸 → 低头（同时启动蹬腿）→ 蹬夹 → 滑行</p>
+      <p><b>口诀</b>：「换完气，头一低，腿就蹬」</p>
+    </div>
+  </details>
+
+  <details class="det">
+    <summary>垂直蹬腿 怎么练</summary>
+    <div class="body">
+      <p><b>在哪</b>：浅水区，水深到胸口/肩膀，能站住。</p>
+      <p><b>做</b>：脚蹬离池底、身体<b>立直</b>，只做蛙泳腿（收翻蹬夹）把自己撑在水里；手贴两侧或轻轻画小圈保持平衡，<b>别用来往上扒</b>。</p>
+      <p><b>为啥有用</b>：腿一停就站回池底，零风险；不用往前游、不用换气、不用管手臂，只抠腿吃水。</p>
+      <p><b>算练成</b>：连蹬 20 秒人浮住甚至微离底，两次蹬腿之间不往下沉（蹬完夹拢锁住了）。</p>
+    </div>
+  </details>
+
+  <div class="report">
+    <h3>游完回来，就告诉我这 5 件事</h3>
+    <ol>
+      <li>翻脚自然还是有意识才做得出？</li>
+      <li>推进感强 / 弱 / 几乎没有？哪条腿更走水？</li>
+      <li>蹬完能滑几秒？滑时沉不沉？</li>
+      <li>腿累在小腿/脚踝，还是大腿？</li>
+      <li>垂直蹬腿能不能浮住？</li>
+    </ol>
+    <div class="tip">把回报告知我，我拿真实水感定周四（8/27）的清单：翻脚还卡就继续死磕翻脚；推进感有了就加「蹬夹速度 / 窄收腿」。</div>
+  </div>
+
+</div>
+
+<script>
+const KEY="mobile_kick_0825";
+let st={};
+try{st=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){}
+const goals=[...document.querySelectorAll(".goal")];
+function upd(){
+  let n=0;
+  goals.forEach(g=>{
+    const id=g.dataset.id, on=!!st[id];
+    g.classList.toggle("done",on);
+    if(on)n++;
+  });
+  document.getElementById("chip").textContent="今日 "+n+"/5";
+}
+goals.forEach(g=>{
+  g.addEventListener("click",()=>{
+    const id=g.dataset.id;
+    st[id]=!st[id];
+    localStorage.setItem(KEY,JSON.stringify(st));
+    upd();
+  });
+});
+upd();
+</script>
+</body>
+</html>
