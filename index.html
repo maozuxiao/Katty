@@ -367,28 +367,19 @@
     .doc-gh:hover { color: var(--primary-active); border-bottom-color: currentColor; }
 
     /* ===================================================================
-       页脚：海浪装饰 + 署名
+       页脚：海浪装饰
        =================================================================== */
     .footer { position: relative; padding-top: 26px; background: var(--bg); }
     .footer-sea {
       height: 150px;
       background: url('assets/img/footer-sea.svg') center bottom/cover no-repeat;
     }
-    .footer-inner {
-      width: min(1160px, calc(100% - 40px)); margin: 0 auto;
-      padding: 18px 0 24px;
-      color: var(--text-secondary); font-size: 0.78rem; text-align: center;
-    }
-    .footer-inner p { margin: 4px 0; }
-    .footer-inner a { color: var(--text-muted); font-weight: 700; text-decoration: none; border-bottom: 1px solid transparent; }
-    .footer-inner a:hover { color: var(--primary-active); border-bottom-color: currentColor; }
-    .credit { font-size: 0.72rem; }
 
     /* ===================================================================
        响应式
        =================================================================== */
     @media (max-width: 760px) {
-      .topbar, .hero-inner, .content-inner, .footer-inner { width: calc(100% - 28px); }
+      .topbar, .hero-inner, .content-inner { width: calc(100% - 28px); }
       .topbar { padding-top: 14px; }
       .brand-name { font-size: 1rem; }
       .date-chip { padding: 7px 12px; font-size: 0.72rem; }
@@ -463,10 +454,6 @@
 
     <footer class="footer">
       <div class="footer-sea" aria-hidden="true"></div>
-      <div class="footer-inner">
-        <p>made for slow mornings · <a href="https://github.com/maozuxiao/Katty" target="_blank" rel="noreferrer">view on GitHub</a></p>
-        <p class="credit">UI 灵感与素材来自 <a href="https://github.com/guokaigdg/animal-island-ui" target="_blank" rel="noreferrer">animal-island-ui</a>（CC BY-NC 4.0，非商用）</p>
-      </div>
     </footer>
   </div>
 
@@ -544,7 +531,7 @@
         <span class="doc-topline">
           <span class="doc-type ${isHtml ? '' : 'md'}">
             <img class="doc-icon" src="${isHtml ? ICON_PAGE : ICON_CRITTERPEDIA}" alt="" aria-hidden="true">
-            ${isHtml ? 'HTML page' : '在编辑器中打开'}
+            ${isHtml ? 'HTML Page' : 'Markdown note'}
           </span>
           <span class="doc-arrow" aria-hidden="true"></span>
         </span>
