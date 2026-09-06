@@ -1,0 +1,2598 @@
+<!DOCTYPE html>
+<html lang="zh-CN" color-scheme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<link rel="icon" type="image/svg+xml" href="https://maozuxiao.github.io/Streamax/Tools/KattyBB_MD_Editor/assets/Markdown.svg">
+<title>额尔古纳河右岸-人物关系对照表</title>
+<style>
+
+/* export/print rgb-safe fallback */
+:root {
+  --white-rgb: 255, 255, 255;
+  --black-rgb: 0, 0, 0;
+  --ink-rgb: 255, 255, 255;
+  --accent-rgb: 232, 133, 155;
+  --text-rgb: 68, 58, 62;
+  --code-muted-rgb: 130, 130, 130;
+}
+/*
+ * Animal Island Theme for Typora
+ * Inspired by animal-island-ui (https://github.com/guokaigdg/animal-island-ui)
+ * Aesthetic: Animal Crossing — warm cream paper, mint accents, 3D pillow shadows
+ */
+
+:root {
+    /* === Primary (mint / leaf) === */
+    --ai-primary:          #19c8b9;
+    --ai-primary-hover:    #3dd4c6;
+    --ai-primary-active:   #11a89b;
+    --ai-primary-bg:       #e6f9f6;
+
+    /* === Text (warm brown) === */
+    --ai-text-main:        #794f27;
+    --ai-text-body:        #725d42;
+    --ai-text-secondary:   #9f927d;
+    --ai-text-muted:       #8a7b66;
+    --ai-text-disabled:    #c4b89e;
+
+    /* === Surfaces (white paper, almost-white desk) === */
+    --ai-bg-app:           #faf9f3;   /* desk: near-white with a hint of warmth */
+    --ai-bg-paper:         #ffffff;   /* paper: pure white */
+    --ai-bg-soft:          #efe9d6;   /* callout / code bg (kept warm to stand out) */
+    --ai-bg-input:         #f7f5ec;
+
+    /* === Borders === */
+    --ai-border:           #a89c83;
+    --ai-border-light:     #c9bea4;
+    --ai-border-soft:      #d8cdb2;
+
+    /* === Status === */
+    --ai-success:          #6fba2c;
+    --ai-warning:          #f5c31c;
+    --ai-error:            #e05a5a;
+    --ai-focus-yellow:     #ffcc00;
+
+    /* === 3D Shadows === */
+    --ai-shadow-button:    #bdaea0;
+    --ai-shadow-input:     #d4c9b4;
+    --ai-shadow-card:      0 3px 10px 0 rgba(61, 52, 40, 0.10);
+    --ai-shadow-large:     0 8px 24px 0 rgba(61, 52, 40, 0.14);
+    --ai-shadow-deep:      0 4px 10px rgba(107, 92, 67, 0.32);
+
+    /* === Radius === */
+    --ai-radius-sm:        12px;
+    --ai-radius:           18px;
+    --ai-radius-lg:        24px;
+    --ai-radius-pill:      999px;
+
+    /* === Type === */
+    --ai-font:             -apple-system, BlinkMacSystemFont,
+                           "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+                           "PingFang SC", "Noto Sans SC", "Noto Sans JP",
+                           "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    --ai-mono:             "JetBrains Mono", "Fira Code", "Cascadia Code",
+                           "SF Mono", Consolas, Menlo, monospace;
+}
+
+/* =========================================================
+   App canvas
+   ========================================================= */
+html {
+    font-size: 16px;
+}
+
+html, body {
+    background-color: var(--ai-bg-app);
+    font-family: var(--ai-font);
+    color: var(--ai-text-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.01em;
+}
+
+#write {
+    max-width: 860px;
+    margin: 30px auto 60px;
+    padding: 52px 64px 96px;
+    background-color: var(--ai-bg-paper);
+    border-radius: var(--ai-radius-lg);
+    box-shadow: var(--ai-shadow-card);
+    line-height: 1.75;
+    font-size: 16px;
+    color: var(--ai-text-body);
+}
+
+#write > *:first-child {
+    margin-top: 0 !important;
+}
+
+/* =========================================================
+   Headings
+   ========================================================= */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--ai-text-main);
+    font-family: var(--ai-font);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1.35;
+}
+
+/* H1 — 居中勋章 · 三色胶囊下划线 */
+h1 {
+    font-size: 2.25em;
+    font-weight: 900;
+    text-align: center;
+    color: var(--ai-text-main);
+    margin: 1.3em 0 1.1em;
+    padding-bottom: 0.5em;
+    line-height: 1.3;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 110px;
+    height: 8px;
+    margin: 0.55em auto 0;
+    border-radius: var(--ai-radius-pill);
+    background: linear-gradient(to right,
+        var(--ai-primary)   0%, var(--ai-primary)   40%,
+        var(--ai-warning)   40%, var(--ai-warning)  60%,
+        var(--ai-primary)   60%, var(--ai-primary)  100%);
+    box-shadow: 0 2px 0 0 var(--ai-shadow-input);
+}
+
+/* H2 — 卡片便签 · 薄荷渐变 + 左厚竖块 */
+h2 {
+    font-size: 1.7em;
+    font-weight: 800;
+    color: var(--ai-text-main);
+    margin: 1.8em 0 0.9em;
+    padding: 12px 20px 12px 22px;
+    background: linear-gradient(
+        to right,
+        var(--ai-primary-bg) 0%,
+        var(--ai-bg-soft) 55%,
+        transparent 100%
+    );
+    border-left: 8px solid var(--ai-primary);
+    border-radius: 0 var(--ai-radius) var(--ai-radius) 0;
+    box-shadow: 0 2px 0 0 var(--ai-shadow-input);
+}
+
+/* H3 — 小节 · 左竖线 + 底部虚线 */
+h3 {
+    font-size: 1.32em;
+    font-weight: 700;
+    color: var(--ai-text-main);
+    margin: 1.5em 0 0.7em;
+    padding: 4px 0 8px 14px;
+    border-left: 5px solid var(--ai-primary);
+    border-bottom: 2px dashed var(--ai-border-soft);
+}
+
+/* H4 — 薄荷文字 + 短"记号笔"下划线 */
+h4 {
+    font-size: 1.15em;
+    font-weight: 800;
+    color: var(--ai-primary-active);
+    margin: 1.3em 0 0.5em;
+    padding-bottom: 6px;
+    background-image: linear-gradient(
+        to right,
+        var(--ai-primary) 0,
+        var(--ai-primary) 36px,
+        transparent 36px
+    );
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 3px;
+}
+
+/* H5 — 米色胶囊贴纸 (inline-block) */
+h5 {
+    font-size: 0.98em;
+    font-weight: 800;
+    color: var(--ai-text-main);
+    margin: 1.1em 0 0.4em;
+    display: inline-block;
+    padding: 3px 14px;
+    background: var(--ai-bg-soft);
+    border: 1.5px solid var(--ai-border-soft);
+    border-radius: var(--ai-radius-pill);
+}
+
+/* H6 — 大写微标签 */
+h6 {
+    font-size: 0.82em;
+    font-weight: 800;
+    color: var(--ai-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 1em 0 0.3em;
+}
+
+/* =========================================================
+   Paragraph / inline
+   ========================================================= */
+p {
+    margin: 0.8em 0;
+    line-height: 1.8;
+}
+
+strong, b {
+    color: var(--ai-text-main);
+    font-weight: 800;
+}
+
+em, i {
+    color: var(--ai-text-main);
+}
+
+mark {
+    background: var(--ai-focus-yellow);
+    color: var(--ai-text-main);
+    padding: 0 4px;
+    border-radius: 4px;
+}
+
+del, s {
+    color: var(--ai-text-disabled);
+}
+
+/* =========================================================
+   Links
+   ========================================================= */
+a {
+    color: var(--ai-primary-active);
+    text-decoration: none;
+    border-bottom: 2px dotted var(--ai-primary);
+    padding: 0 2px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#write a:hover {
+    color: var(--ai-primary-active);
+    background: transparent;
+    border-bottom-style: solid;
+}
+
+/* =========================================================
+   Lists
+   ========================================================= */
+ul, ol {
+    padding-left: 1.8em;
+    margin: 0.7em 0;
+}
+
+li {
+    margin: 0.25em 0;
+}
+
+ul > li::marker {
+    color: var(--ai-primary);
+}
+
+ol > li::marker {
+    color: var(--ai-primary-active);
+    font-weight: 800;
+}
+
+/* Task list — soft 3D checkbox */
+.md-task-list-item > input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    vertical-align: -3px;
+    background: var(--ai-bg-input);
+    border: 2.5px solid var(--ai-border-light);
+    border-radius: 6px;
+    box-shadow: 0 2px 0 0 var(--ai-shadow-input);
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+}
+
+.md-task-list-item > input:checked {
+    background: var(--ai-success);
+    border-color: var(--ai-success);
+    box-shadow: 0 2px 0 0 #5a9e1e;
+}
+
+.md-task-list-item > input:checked::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+}
+
+/* =========================================================
+   Blockquote — pillow card
+   ========================================================= */
+blockquote {
+    margin: 1em 0;
+    padding: 12px 20px;
+    background: var(--ai-bg-soft);
+    border-left: 6px solid var(--ai-primary);
+    border-radius: var(--ai-radius);
+    color: var(--ai-text-body);
+    box-shadow: 0 3px 0 0 var(--ai-shadow-input);
+}
+
+blockquote p {
+    margin: 0.4em 0;
+}
+
+blockquote blockquote {
+    background: rgba(255, 255, 255, 0.45);
+    border-left-color: var(--ai-warning);
+    box-shadow: none;
+}
+
+/* =========================================================
+   Code
+   ========================================================= */
+code, tt {
+    font-family: var(--ai-mono);
+    font-size: 0.9em;
+    color: var(--ai-primary-active);
+    background: var(--ai-primary-bg);
+    padding: 2px 8px;
+    border: 1.5px solid #cdeeea;
+    border-radius: 6px;
+}
+
+.md-fences, pre {
+    background: var(--ai-bg-soft);
+    border: 2px solid var(--ai-border-light);
+    border-radius: var(--ai-radius);
+    padding: 16px 20px;
+    margin: 1em 0;
+    box-shadow: 0 3px 0 0 var(--ai-shadow-input);
+    font-family: var(--ai-mono);
+    font-size: 0.92em;
+    color: var(--ai-text-body);
+}
+
+.CodeMirror {
+    background: transparent !important;
+    font-family: var(--ai-mono) !important;
+}
+
+.CodeMirror-gutters {
+    background: transparent !important;
+    border-right: 1.5px dashed var(--ai-border-light) !important;
+}
+
+.CodeMirror-linenumber {
+    color: var(--ai-text-disabled) !important;
+}
+
+.CodeMirror-cursor {
+    border-left: 2px solid var(--ai-primary-active) !important;
+}
+
+.CodeMirror-selected {
+    background: var(--ai-focus-yellow) !important;
+}
+
+/* === Syntax — applies to ALL CodeMirror instances (fenced + source) === */
+
+/* Markdown headers/formatting — override CodeMirror's default blue */
+.CodeMirror .cm-header,
+.CodeMirror .cm-header-1,
+.CodeMirror .cm-header-2,
+.CodeMirror .cm-header-3,
+.CodeMirror .cm-header-4,
+.CodeMirror .cm-header-5,
+.CodeMirror .cm-header-6 {
+    color: var(--ai-text-main) !important;
+    font-weight: 800;
+}
+
+.CodeMirror .cm-formatting,
+.CodeMirror .cm-formatting-header,
+.CodeMirror .cm-formatting-list,
+.CodeMirror .cm-formatting-quote,
+.CodeMirror .cm-formatting-code,
+.CodeMirror .cm-formatting-code-block,
+.CodeMirror .cm-formatting-strong,
+.CodeMirror .cm-formatting-em,
+.CodeMirror .cm-formatting-link,
+.CodeMirror .cm-formatting-link-string,
+.CodeMirror .cm-formatting-image {
+    color: var(--ai-primary-active) !important;
+    opacity: 0.9;
+}
+
+.CodeMirror .cm-strong { color: var(--ai-text-main) !important; font-weight: 800; }
+.CodeMirror .cm-em     { color: #c97d1c !important; font-style: italic; }
+.CodeMirror .cm-link   { color: var(--ai-primary-active) !important; }
+.CodeMirror .cm-url    { color: var(--ai-text-secondary) !important; }
+.CodeMirror .cm-quote  { color: var(--ai-text-secondary) !important; font-style: italic; }
+
+/* General language syntax (Python/JS/etc) */
+.CodeMirror .cm-keyword { color: #c94444 !important; font-weight: 700; }
+.CodeMirror .cm-atom    { color: #dba90e !important; }
+.CodeMirror .cm-number  { color: #dba90e !important; }
+.CodeMirror .cm-def     { color: var(--ai-primary-active) !important; font-weight: 700; }
+.CodeMirror .cm-variable,
+.CodeMirror .cm-variable-2,
+.CodeMirror .cm-variable-3 { color: var(--ai-text-main) !important; }
+.CodeMirror .cm-property { color: var(--ai-primary-active) !important; }
+.CodeMirror .cm-operator { color: var(--ai-text-main) !important; }
+.CodeMirror .cm-string   { color: #5a9e1e !important; }
+.CodeMirror .cm-string-2 { color: #4a8517 !important; }
+.CodeMirror .cm-comment  { color: var(--ai-text-disabled) !important; font-style: italic; }
+.CodeMirror .cm-tag      { color: #c94444 !important; }
+.CodeMirror .cm-attribute{ color: #dba90e !important; }
+.CodeMirror .cm-bracket  { color: var(--ai-text-secondary) !important; }
+.CodeMirror .cm-builtin  { color: var(--ai-primary-active) !important; }
+.CodeMirror .cm-meta     { color: var(--ai-text-muted) !important; }
+
+/* Inline KaTeX/MathJax */
+.MathJax, mjx-container {
+    color: var(--ai-text-main);
+}
+
+/* =========================================================
+   Horizontal rule — dashed paw-print path
+   ========================================================= */
+hr, #write hr, #preview hr {
+    border: none;
+    height: 18px;
+    width: 70%;
+    margin: 2.4em auto;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 18'%3E%3Cellipse cx='16' cy='13' rx='5' ry='3.8' fill='%2319c8b9'/%3E%3Ccircle cx='9' cy='6' r='2.3' fill='%2319c8b9'/%3E%3Ccircle cx='14' cy='3' r='2.3' fill='%2319c8b9'/%3E%3Ccircle cx='19' cy='3' r='2.3' fill='%2319c8b9'/%3E%3Ccircle cx='24' cy='6' r='2.3' fill='%2319c8b9'/%3E%3C/svg%3E");
+    background-size: 80px 18px;
+    background-repeat: repeat-x;
+    background-position: center;
+}
+
+/* =========================================================
+   Tables
+   ========================================================= */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1.2em auto;
+    border: 2px solid var(--ai-border-light);
+    border-radius: var(--ai-radius);
+    overflow: hidden;
+    box-shadow: var(--ai-shadow-card);
+}
+
+thead {
+    background: var(--ai-primary);
+}
+
+th {
+    color: white;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    padding: 10px 16px;
+    text-align: left;
+    border: none;
+}
+
+td {
+    padding: 10px 16px;
+    border-top: 1.5px dashed var(--ai-border-soft);
+    color: var(--ai-text-body);
+}
+
+tbody tr:nth-child(even) td {
+    background: var(--ai-bg-soft);
+}
+
+tbody tr:hover td {
+    background: var(--ai-primary-bg);
+}
+
+/* =========================================================
+   Images
+   ========================================================= */
+img {
+    max-width: 100%;
+    border-radius: var(--ai-radius);
+    box-shadow: var(--ai-shadow-deep);
+}
+
+p > img:only-child {
+    display: block;
+    margin: 1em auto;
+}
+
+/* =========================================================
+   Footnotes
+   ========================================================= */
+.md-footnote {
+    background: var(--ai-primary-bg);
+    color: var(--ai-primary-active);
+    border-radius: 6px;
+    padding: 1px 6px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   Selection / focus
+   ========================================================= */
+::selection {
+    background: var(--ai-focus-yellow);
+    color: var(--ai-text-main);
+}
+
+#write .md-focus-container {
+    outline: none;
+}
+
+/* =========================================================
+   Sidebar
+   ========================================================= */
+.sidebar,
+#typora-sidebar,
+.sidebar-content,
+.sidebar-content-content,
+.sidebar-tabs {
+    background-color: var(--ai-bg-app) !important;
+    color: var(--ai-text-body) !important;
+    font-family: var(--ai-font);
+    border-right: 1.5px solid var(--ai-border-soft);
+}
+
+.sidebar-tabs .sidebar-tab {
+    color: var(--ai-text-secondary);
+}
+
+.sidebar-tabs .sidebar-tab.active {
+    color: var(--ai-primary-active);
+    border-bottom: 3px solid var(--ai-primary);
+}
+
+.outline-item,
+.file-list-item {
+    border-radius: var(--ai-radius-sm);
+    margin: 2px 6px;
+    padding: 6px 10px;
+    color: var(--ai-text-body);
+}
+
+.outline-item:hover,
+.file-list-item:hover {
+    background: var(--ai-bg-soft) !important;
+    color: var(--ai-text-main) !important;
+}
+
+.outline-active,
+.file-list-item-selected {
+    background: var(--ai-primary-bg) !important;
+    color: var(--ai-primary-active) !important;
+    font-weight: 700;
+}
+
+/* Search */
+.searchpanel-search-option-btn {
+    background: var(--ai-bg-input);
+    border: 2px solid var(--ai-border-light);
+    border-radius: var(--ai-radius-sm);
+}
+
+/* =========================================================
+   Quick open / find bar
+   ========================================================= */
+#typora-quick-open {
+    background: var(--ai-bg-app) !important;
+}
+
+#typora-quick-open-input,
+.searchpanel-search-input,
+input[type="text"],
+input[type="search"] {
+    background: var(--ai-bg-input);
+    border: 2.5px solid var(--ai-border-light) !important;
+    border-radius: var(--ai-radius);
+    box-shadow: 0 3px 0 0 var(--ai-shadow-input);
+    color: var(--ai-text-body);
+    padding: 6px 12px;
+    transition: all 0.15s;
+}
+
+#typora-quick-open-input:focus,
+input[type="text"]:focus {
+    border-color: var(--ai-primary) !important;
+    box-shadow: 0 3px 0 0 var(--ai-primary-active);
+    outline: none;
+}
+
+/* Buttons (toolbar / popovers) — 3D pillow */
+button,
+.btn,
+.export-item {
+    background: white;
+    border: 2px solid var(--ai-border-light);
+    border-radius: var(--ai-radius-sm);
+    box-shadow: 0 3px 0 0 var(--ai-shadow-button);
+    color: var(--ai-text-main);
+    font-weight: 700;
+    padding: 4px 12px;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 0 0 var(--ai-shadow-button);
+    background: var(--ai-bg-soft);
+}
+
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 0 var(--ai-shadow-button);
+}
+
+button.primary,
+.btn-primary {
+    background: var(--ai-primary);
+    color: white;
+    border-color: var(--ai-primary-active);
+    box-shadow: 0 3px 0 0 var(--ai-primary-active);
+}
+
+button.primary:hover {
+    background: var(--ai-primary-hover);
+    box-shadow: 0 4px 0 0 var(--ai-primary-active);
+}
+
+/* View mode toggle — 保持与其他主题一致的图标尺寸与样式 */
+.view-mode-group {
+    display: inline-flex;
+    gap: 2px;
+}
+.view-mode-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: var(--ai-bg-soft, #fff8e6);
+    border: 2px solid var(--ai-border-light);
+    border-radius: 0;
+    box-shadow: 0 3px 0 0 var(--ai-shadow-button);
+    color: var(--ai-text-main);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.view-mode-btn:first-child { border-radius: var(--ai-radius-sm) 0 0 var(--ai-radius-sm); }
+.view-mode-btn:last-child { border-radius: 0 var(--ai-radius-sm) var(--ai-radius-sm) 0; }
+.view-mode-btn:not(:first-child):not(:last-child) { border-radius: 0; border-left: none; }
+.view-mode-btn svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+.view-mode-btn.active {
+    background: var(--ai-primary);
+    color: white;
+    border-color: var(--ai-primary-active);
+    box-shadow: 0 3px 0 0 var(--ai-primary-active);
+}
+.view-mode-btn:hover:not(.active) {
+    background: var(--ai-bg-paper, #fff8e6);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 0 0 var(--ai-shadow-button);
+}
+.view-mode-btn:active:not(.active) {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 0 var(--ai-shadow-button);
+}
+
+/* Format toolbar — larger icons for better usability */
+.fmt-toolbar .fmt-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+    background: var(--ai-bg-paper);
+    border: 2px solid var(--ai-border-light);
+    border-radius: var(--ai-radius-sm);
+    box-shadow: 0 3px 0 0 var(--ai-shadow-button);
+    color: var(--ai-text-main);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.fmt-toolbar .fmt-btn:hover {
+    background: var(--ai-bg-soft);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 0 0 var(--ai-shadow-button);
+    color: var(--ai-text-body);
+}
+.fmt-toolbar .fmt-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 0 var(--ai-shadow-button);
+}
+.fmt-toolbar .fmt-btn svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+.fmt-toolbar .fmt-btn .fmt-label {
+    font-size: 16px;
+    font-weight: 800;
+}
+.fmt-toolbar .fmt-btn.active {
+    background: var(--ai-primary);
+    color: white;
+    border-color: var(--ai-primary-active);
+    box-shadow: 0 3px 0 0 var(--ai-primary-active);
+}
+
+/* Toolbar dropdown items */
+.fmt-item {
+    padding: 8px 14px;
+    font-size: 14px;
+}
+.fmt-item-key {
+    font-size: 12px;
+}
+
+/* =========================================================
+   Footer / status bar
+   ========================================================= */
+footer,
+#footer {
+    background: var(--ai-bg-app);
+    color: var(--ai-text-secondary);
+    border-top: 2px dashed var(--ai-border-soft);
+    font-family: var(--ai-font);
+}
+
+.footer-item-info {
+    color: var(--ai-text-muted);
+}
+
+/* =========================================================
+   Source mode (CodeMirror) — high-contrast markdown source view
+   ========================================================= */
+#typora-source {
+    font-family: var(--ai-mono) !important;
+    background: var(--ai-bg-paper) !important;
+    color: var(--ai-text-body) !important;
+}
+
+#typora-source .CodeMirror {
+    background: var(--ai-bg-paper) !important;
+    color: var(--ai-text-body) !important;
+    font-family: var(--ai-mono) !important;
+    line-height: 1.7;
+}
+
+#typora-source .CodeMirror-cursor {
+    border-left: 2px solid var(--ai-primary-active) !important;
+}
+
+#typora-source .CodeMirror-gutters {
+    background: var(--ai-bg-soft) !important;
+    border-right: 1px solid var(--ai-border-light) !important;
+}
+
+#typora-source .CodeMirror-linenumber {
+    color: var(--ai-text-secondary) !important;
+    font-weight: 600;
+    padding: 0 8px 0 6px;
+}
+
+#typora-source .CodeMirror-selected,
+#typora-source .CodeMirror-line::selection,
+#typora-source .CodeMirror-line ::selection {
+    background: var(--ai-focus-yellow) !important;
+}
+
+/* === Markdown source syntax (override default CM blue) === */
+#typora-source .cm-header,
+#typora-source .cm-header-1,
+#typora-source .cm-header-2,
+#typora-source .cm-header-3,
+#typora-source .cm-header-4,
+#typora-source .cm-header-5,
+#typora-source .cm-header-6 {
+    color: var(--ai-text-main) !important;
+    font-weight: 800;
+}
+
+#typora-source .cm-formatting,
+#typora-source .cm-formatting-header,
+#typora-source .cm-formatting-list,
+#typora-source .cm-formatting-quote,
+#typora-source .cm-formatting-code,
+#typora-source .cm-formatting-code-block {
+    color: var(--ai-primary-active) !important;
+    opacity: 0.9;
+}
+
+#typora-source .cm-formatting-strong,
+#typora-source .cm-strong {
+    color: var(--ai-text-main) !important;
+    font-weight: 800;
+}
+
+#typora-source .cm-formatting-em,
+#typora-source .cm-em {
+    color: #c97d1c !important;
+    font-style: italic;
+}
+
+#typora-source .cm-link,
+#typora-source .cm-formatting-link,
+#typora-source .cm-formatting-link-string {
+    color: var(--ai-primary-active) !important;
+}
+
+#typora-source .cm-url {
+    color: var(--ai-text-secondary) !important;
+}
+
+#typora-source .cm-quote {
+    color: var(--ai-text-secondary) !important;
+    font-style: italic;
+}
+
+#typora-source .cm-comment {
+    color: var(--ai-text-disabled) !important;
+    font-style: italic;
+}
+
+#typora-source .cm-meta { color: var(--ai-text-muted) !important; }
+#typora-source .cm-string { color: #5a9e1e !important; }
+#typora-source .cm-tag { color: #c94444 !important; }
+#typora-source .cm-keyword { color: #c94444 !important; }
+#typora-source .cm-number { color: #dba90e !important; }
+#typora-source .cm-variable { color: var(--ai-text-body) !important; }
+#typora-source .cm-def { color: var(--ai-primary-active) !important; }
+
+/* =========================================================
+   Misc UI
+   ========================================================= */
+.popover-title {
+    background: var(--ai-primary-bg);
+    color: var(--ai-primary-active);
+    border-radius: var(--ai-radius-sm) var(--ai-radius-sm) 0 0;
+    font-weight: 800;
+}
+
+.popover {
+    background: var(--ai-bg-paper);
+    border: 2px solid var(--ai-border-light);
+    border-radius: var(--ai-radius);
+    box-shadow: var(--ai-shadow-large);
+    color: var(--ai-text-body);
+}
+
+.popover.bottom > .arrow:after { border-bottom-color: var(--ai-bg-paper); }
+.popover.top    > .arrow:after { border-top-color: var(--ai-bg-paper); }
+.popover.left   > .arrow:after { border-left-color: var(--ai-bg-paper); }
+.popover.right  > .arrow:after { border-right-color: var(--ai-bg-paper); }
+
+.tip,
+.tooltip {
+    background: var(--ai-text-main);
+    color: white;
+    border-radius: var(--ai-radius-sm);
+    box-shadow: var(--ai-shadow-card);
+    font-family: var(--ai-font);
+}
+
+/* Auto-suggest / dropdown */
+.auto-suggest-container,
+.dropdown-menu {
+    background: var(--ai-bg-paper);
+    border: 2px solid var(--ai-border-light);
+    border-radius: var(--ai-radius);
+    box-shadow: var(--ai-shadow-large);
+}
+
+.dropdown-menu > li > a {
+    color: var(--ai-text-body);
+}
+
+.dropdown-menu > li > a:hover {
+    background: var(--ai-primary-bg);
+    color: var(--ai-primary-active);
+}
+
+/* Modal */
+.modal-content {
+    background: var(--ai-bg-paper);
+    border: 2px solid var(--ai-border-light);
+    border-radius: var(--ai-radius-lg);
+    box-shadow: var(--ai-shadow-large);
+    color: var(--ai-text-body);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--ai-bg-app);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--ai-border-light);
+    border-radius: var(--ai-radius-pill);
+    border: 2px solid var(--ai-bg-app);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--ai-primary);
+}
+
+/* =========================================================
+   Print
+   ========================================================= */
+@media print {
+    html, body {
+        background: white;
+    }
+    #write {
+        box-shadow: none;
+        background: white;
+    }
+    .md-fences, pre, blockquote, table {
+        box-shadow: none;
+    }
+}
+
+:root { --white-rgb: 255, 255, 255; --black-rgb: 0, 0, 0; }
+.preview-panel { flex: 1 1 0%; overflow: auto; background: var(--bg); min-width: 0px; }
+.preview-panel.drag-over { outline: 2px dashed var(--accent, #e8859b); outline-offset: -4px; background: var(--accent-soft, rgba(232, 133, 155, 0.08)); }
+.preview-panel .markdown-body { max-width: 860px; line-height: 1.8; font-size: 16px; color: var(--text); margin: 0px auto; padding: var(--space-2xl) var(--space-xl) var(--space-3xl); border: 1px solid var(--border); border-radius: 24px; box-shadow: var(--shadow-lg); overflow-anchor: none; }
+.markdown-body p { margin: 1.1em 0px; }
+.markdown-body a { color: var(--accent); text-decoration: none; transition: color 0.2s; border-bottom: 1px solid transparent; }
+.markdown-body a:hover { border-bottom-color: var(--accent); background: transparent; }
+.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 { color: var(--text); font-weight: 800; line-height: 1.25; margin: var(--space-2xl) 0 var(--space-md); letter-spacing: -0.015em; position: relative; }
+.markdown-body h1 { font-size: 2.25em; letter-spacing: -0.02em; border-bottom: 1px solid rgba(var(--accent-rgb), 0.3); padding-bottom: 0.3em; }
+.markdown-body h2 { font-size: 1.68em; border-bottom: 1px solid rgba(var(--accent-rgb), 0.22); padding-bottom: 0.24em; color: rgba(var(--text-rgb), 0.9); }
+.markdown-body h3 { font-size: 1.32em; color: rgba(var(--text-rgb), 0.86); }
+.markdown-body h4 { font-size: 1.15em; color: rgba(var(--text-rgb), 0.8); }
+.markdown-body h1::after, .markdown-body h2::after { content: ""; position: absolute; left: 0px; bottom: -0.5em; width: 76px; height: 3px; background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.45), transparent); border-radius: 999px; }
+.markdown-body h3::after { content: ""; position: absolute; left: 0px; bottom: -0.38em; width: 44px; height: 2px; background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.32), transparent); border-radius: 999px; }
+.markdown-body h4::after { content: ""; position: absolute; left: 0px; bottom: -0.34em; width: 32px; height: 2px; background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.22), transparent); border-radius: 999px; }
+:where(.markdown-body hr) { border: 0px; height: 1px; background: linear-gradient(90deg, transparent, var(--border-semi), transparent); margin: var(--space-3xl) 0; }
+.markdown-body blockquote { margin: var(--space-xl) 0; padding: var(--space-lg) var(--space-xl); background: rgba(var(--accent-rgb), 0.08); border-left: 4px solid var(--accent); border-radius: 14px; color: var(--text); position: relative; box-shadow: 0 2px 8px rgba(var(--accent-rgb), 0.08); }
+.markdown-body blockquote p:first-child { margin-top: 0px; }
+.markdown-body blockquote p:last-child { margin-bottom: 0px; }
+.markdown-body ul, .markdown-body ol { padding-left: 1.5em; margin: 1em 0px; }
+.markdown-body li { margin: 0.5em 0px; }
+.markdown-body li > ul, .markdown-body li > ol { margin: 0.4em 0px; }
+.markdown-body ul li::marker { color: rgba(var(--accent-rgb), 0.72); font-size: 0.98em; font-weight: 700; }
+.markdown-body ol li::marker { color: rgba(var(--accent-rgb), 0.72); font-weight: 800; font-variant-numeric: tabular-nums; }
+.markdown-body table { border-collapse: separate; border-spacing: 0px; width: 100%; margin: 2em 0px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: rgba(0, 0, 0, 0.02) 0px 4px 12px; }
+.markdown-body th, .markdown-body td { padding: 0.75em 1em; border-bottom: 1px solid var(--border); }
+.markdown-body th { text-align: left; background: var(--surface); font-weight: 600; color: var(--text); }
+.markdown-body tr:last-child td { border-bottom: 0px; }
+.markdown-body tr:nth-child(2n) td { background: rgba(var(--accent-rgb), 0.02); }
+.markdown-body code { font-family: var(--font-mono); font-size: 0.88em; padding: 0.2em 0.45em; border-radius: 7px; background: rgba(var(--accent-rgb), 0.14); color: var(--accent); font-weight: 600; border: 1px solid rgba(var(--accent-rgb), 0.32); }
+.markdown-body pre { background: var(--code-bg); color: var(--code-text); border: 1px solid rgba(var(--accent-rgb), 0.18); border-radius: 16px; padding: 1.4em; margin: 2em 0px; overflow: auto; box-shadow: 0 18px 50px rgba(var(--text-rgb), 0.12); font-family: var(--font-mono); font-size: 14.5px; line-height: 1.6; position: relative; }
+.markdown-body pre::before { content: ""; display: block; width: 64px; height: 10px; margin-bottom: 12px; border-radius: 0px; background-image: ; background-position-x: ; background-position-y: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ; background-size: 64px 10px; background-repeat: no-repeat; }
+.markdown-body pre .code-lang-label { position: absolute; top: 8px; right: 12px; font-size: 11px; font-family: var(--font-sans); color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 2px 8px; opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 2; }
+.markdown-body pre:hover .code-lang-label { opacity: 1; }
+.markdown-body pre::before { content: ""; display: block; width: 64px; height: 10px; margin-bottom: 12px; border-radius: 0px; background-image: ; background-position-x: ; background-position-y: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ; background-size: 64px 10px; background-repeat: no-repeat; }
+.markdown-body pre code { background: transparent; padding: 0px; color: var(--code-ink); font-weight: normal; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; }
+.markdown-body img { max-width: 100%; height: auto; border-radius: 14px; box-shadow: var(--shadow); display: block; margin: 1.5em auto; }
+.markdown-body mark { background: linear-gradient(120deg, rgba(var(--accent-rgb), 0.25), rgba(var(--accent-rgb), 0.12)); color: inherit; padding: 0.12em 0.26em; border-radius: 9px; border: 1px solid rgba(var(--accent-rgb), 0.32); box-shadow: 0 10px 26px rgba(var(--accent-rgb), 0.18); }
+.markdown-body u { text-decoration: none; background-image: linear-gradient(120deg, rgba(var(--accent-rgb), 0.5), rgba(var(--accent-rgb), 0.18)); background-repeat: no-repeat; background-size: 100% 0.16em; background-position: 0px 90%; border-radius: 4px; padding-bottom: 2px; }
+.markdown-body kbd { font-family: var(--font-mono); font-size: 0.85em; padding: 0.2em 0.5em; border-top-color: ; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-left-color: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-bottom-width: 3px; border-radius: 8px; background: var(--bg); color: var(--text); margin: 0px 0.2em; }
+.markdown-body .task-list-item { list-style-type: none; padding-left: 0px; margin-left: -1.5em; }
+.markdown-body .task-list-item input { margin-right: 0.6em; accent-color: var(--accent); transform: translateY(1px); }
+.markdown-body .toc { background: var(--surface, #f5f2f1); border: 1px solid var(--border, rgba(0,0,0,0.1)); border-radius: 14px; padding: 16px 20px; margin: 1.5em 0px; }
+.markdown-body .toc ul { list-style: none; padding-left: 0px; }
+.markdown-body .toc li { margin: 4px 0px; }
+.markdown-body .toc a { color: var(--accent, #e8859b); text-decoration: none !important; border-bottom-width: medium !important; border-bottom-style: none !important; border-bottom-color: currentcolor !important; border-radius: 0px !important; }
+.markdown-body .toc a:hover { text-decoration: underline !important; background: transparent !important; color: var(--accent, #e8859b) !important; border-bottom-color: transparent !important; }
+.markdown-body .toc-level-2 { padding-left: 1.2em; }
+.markdown-body .toc-level-3 { padding-left: 2.4em; }
+.markdown-body .toc-level-4 { padding-left: 3.6em; }
+.markdown-body .toc-level-5 { padding-left: 4.8em; }
+.markdown-body .toc-level-6 { padding-left: 6em; }
+.markdown-body .alert { padding: 16px; margin: 16px 0px; border-radius: 8px; border-top-color: ; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-left: 4px solid var(--alert-color, #8888d4); background: color-mix(in srgb, var(--alert-color, #8888d4), var(--bg, #ffffff) 88%); color: var(--text, #24292f); }
+.markdown-body .alert-note { --alert-color: var(--info, #58a6ff); }
+.markdown-body .alert-tip { --alert-color: var(--success, #3fb950); }
+.markdown-body .alert-warning { --alert-color: var(--warning, #d29922); }
+.markdown-body .alert-caution { --alert-color: var(--error, #db6d28); }
+.markdown-body .alert-important { --alert-color: var(--important, #f85149); }
+.markdown-body .alert-title { font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; color: var(--alert-color, #8888d4); }
+.markdown-body .alert-content { color: var(--text, #24292f); line-height: 1.6; }
+.markdown-body .mermaid { text-align: center; margin: 1.5em 0px; background: var(--surface, #f5f2f1); border-radius: 14px; padding: 16px; }
+.toc-float-panel { position: absolute; right: 0px; top: calc(100% + 8px); width: 240px; background: var(--surface, #f5f2f1); border: 1px solid var(--border, rgba(0,0,0,0.1)); border-radius: 14px; box-shadow: var(--shadow-lg, 0 10px 30px rgba(0,0,0,0.1)); opacity: 0; visibility: hidden; transform: translateY(-8px); transition: 0.25s; overflow: hidden; }
+.toc-float-header { padding: 12px 16px; font-size: 14px; font-weight: 700; color: var(--text, #443a3e); border-bottom: 1px solid var(--border, rgba(0,0,0,0.1)); background: var(--accent-soft, rgba(232,133,155,0.1)); }
+#write td, #write th { word-break: break-word; overflow-wrap: break-word; }
+:root { --accent: var(--ai-primary); --accent-hover: var(--ai-primary-hover); --accent-active: var(--ai-primary-active); --accent-soft: var(--ai-primary-bg); --accent-rgb: 25, 200, 185; --bg: var(--ai-bg-app); --surface: var(--ai-bg-paper); --surface-2: var(--ai-bg-soft); --text: var(--ai-text-body); --text-rgb: 114, 93, 66; --text-semi: var(--ai-text-secondary); --muted: var(--ai-text-muted); --border: var(--ai-border-light); --border-semi: var(--ai-border); --shadow: var(--ai-shadow-card); --shadow-lg: var(--ai-shadow-large); --font-sans: var(--ai-font); --font-mono: var(--ai-mono); --code-bg: var(--ai-bg-soft); --code-text: var(--ai-text-secondary); --code-ink: var(--ai-text-body); --code-dot-red: #d87070; --code-dot-yellow: #d8c870; --code-dot-green: #70c888; --space-unit: 8px; --space-xs: calc(var(--space-unit) * 1); --space-sm: calc(var(--space-unit) * 1.5); --space-md: calc(var(--space-unit) * 2); --space-lg: calc(var(--space-unit) * 3); --space-xl: calc(var(--space-unit) * 4); --space-2xl: calc(var(--space-unit) * 6); --space-3xl: calc(var(--space-unit) * 8); }
+
+:root {
+  --accent: var(--ai-primary);
+  --accent-hover: var(--ai-primary-hover);
+  --accent-active: var(--ai-primary-active);
+  --accent-soft: var(--ai-primary-bg);
+  --accent-rgb: 25, 200, 185;
+  --bg: var(--ai-bg-app);
+  --surface: var(--ai-bg-paper);
+  --surface-2: var(--ai-bg-soft);
+  --text: var(--ai-text-body);
+  --text-rgb: 114, 93, 66;
+  --text-semi: var(--ai-text-secondary);
+  --muted: var(--ai-text-muted);
+  --border: var(--ai-border-light);
+  --border-semi: var(--ai-border);
+  --shadow: var(--ai-shadow-card);
+  --shadow-lg: var(--ai-shadow-large);
+  --font-sans: var(--ai-font);
+  --font-mono: var(--ai-mono);
+  --code-bg: var(--ai-bg-soft);
+  --code-text: var(--ai-text-secondary);
+  --code-ink: var(--ai-text-body);
+  --code-dot-red: #d87070;
+  --code-dot-yellow: #d8c870;
+  --code-dot-green: #70c888;
+  --space-unit: 8px;
+  --space-xs: calc(var(--space-unit) * 1);
+  --space-sm: calc(var(--space-unit) * 1.5);
+  --space-md: calc(var(--space-unit) * 2);
+  --space-lg: calc(var(--space-unit) * 3);
+  --space-xl: calc(var(--space-unit) * 4);
+  --space-2xl: calc(var(--space-unit) * 6);
+  --space-3xl: calc(var(--space-unit) * 8);
+}
+
+
+/* export compat */
+#write.markdown-body { max-width: 860px; margin: 30px auto 60px; padding: 52px 80px 96px; box-sizing: border-box; line-height: 1.8; font-size: 16px; }
+:where(hr) { border: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--border-semi, rgba(0,0,0,0.15)), transparent); margin: 2em 0; }
+#write pre { background: var(--code-bg, #f5f2f1); color: var(--code-text, #7b6c71); border: 1px solid rgba(var(--accent-rgb, 232,133,155), 0.18); border-radius: 16px; padding: 1.4em; margin: 2em 0; overflow: auto; font-family: var(--font-mono, monospace); font-size: 14.5px; line-height: 1.6; position: relative; }
+#write pre::before { content: ""; display: block; width: 64px; height: 10px; margin-bottom: 12px; border-radius: 0; background: radial-gradient(circle at 5px 5px, var(--code-dot-red, #d87070) 5px, transparent 5.5px), radial-gradient(circle at 23px 5px, var(--code-dot-yellow, #d8c870) 5px, transparent 5.5px), radial-gradient(circle at 41px 5px, var(--code-dot-green, #70c888) 5px, transparent 5.5px); background-size: 64px 10px; background-repeat: no-repeat; }
+#write pre code { background: transparent; padding: 0; color: var(--code-ink, #443a3e); font-weight: normal; border: none; }
+#write blockquote { display: block; }
+#write pre { padding-top: 20px; }
+
+
+/* export print-safe rgba fallback (override color-mix oklch) */
+@media print {
+  :root {
+    --shadow-sm: none;
+    --shadow: none;
+    --shadow-lg: none;
+    --border: rgba(var(--text-rgb, 68, 58, 62), 0.10);
+    --border-semi: rgba(var(--text-rgb, 68, 58, 62), 0.15);
+    --accent-soft: rgba(var(--accent-rgb, 232, 133, 155), 0.12);
+    --muted: rgba(var(--text-rgb, 68, 58, 62), 0.55);
+  }
+}
+
+
+.footnote-tooltip {
+  position: fixed;
+  z-index: 4000;
+  background: #f5f2f1;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.15);
+  padding: 12px 16px;
+  max-width: 300px;
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 13px;
+  line-height: 1.6;
+  display: none;
+  pointer-events: none;
+}
+.footnote-tooltip.show { display: block; }
+.footnote-ref { cursor: pointer; }
+.footnote-ref.active { color: #e8859b; font-weight: bold; }
+.footnote-item { margin: 4px 0; padding: 4px 8px; border-radius: 8px; }
+.footnote-item.highlight { background: rgba(232,133,155,0.1); }
+.footnote-content { display: inline; }
+.footnote-content p { display: inline; margin: 0; }
+.footnote-ref.flash { animation: footnote-flash 0.5s ease; }
+@keyframes footnote-flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.footnote-backref { color: #e8859b; text-decoration: none; font-size: 12px; margin-left: 4px; display: inline; }
+.footnote-backref:hover { text-decoration: underline; }
+/* 代码语言标签（导出保留） */
+#write pre { position: relative; }
+#write pre .code-lang-label {
+  position: absolute; top: 8px; right: 12px;
+  font-size: 11px; color: #666;
+  background: #f6f8fa; border: 1px solid #d0d7de;
+  border-radius: 6px; padding: 2px 8px;
+  opacity: 0; transition: opacity 0.2s;
+  pointer-events: none; z-index: 2;
+}
+#write pre:hover .code-lang-label { opacity: 1; }
+/* highlight.js 语法高亮主题（导出内嵌，随明暗主题自动切换配色） */
+.hljs { color: #24292e; background: transparent; }
+.hljs-keyword, .hljs-selector-tag, .hljs-title.class_ { color: #d73a49; }
+.hljs-string, .hljs-regexp, .hljs-addition { color: #032f62; }
+.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr { color: #005cc5; }
+.hljs-built_in, .hljs-type { color: #6f42c1; }
+.hljs-comment, .hljs-quote, .hljs-deletion, .hljs-meta { color: #6a737d; }
+.hljs-function .hljs-title, .hljs-title.function_ { color: #6f42c1; }
+.hljs-attr, .hljs-attribute { color: #e36209; }
+.hljs-symbol, .hljs-bullet, .hljs-link { color: #005cc5; }
+.hljs-emphasis { font-style: italic; }
+.hljs-strong { font-weight: bold; }
+.hljs-tag { color: #22863a; }
+.hljs-name { color: #22863a; }
+.hljs-section { color: #005cc5; font-weight: bold; }
+
+
+/* 导出页内：宽度切换按钮（与目录按钮同款风格，860px 居中 ↔ 浏览器全宽） */
+.export-width-btn {
+  position: fixed; right: 20px; bottom: 20px; top: auto; width: 44px; height: 44px;
+  background: var(--surface, #f5f2f1); border: 1px solid var(--border, rgba(0,0,0,0.1));
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--accent, #e8859b); opacity: 0.6;
+  transition: all 0.2s ease; z-index: 100; box-shadow: var(--shadow, 0 4px 12px rgba(0,0,0,0.05));
+}
+.export-width-btn:hover { opacity: 1; background: var(--accent-soft, rgba(232,133,155,0.15)); transform: scale(1.1); }
+.export-width-btn .wicon { width: 20px; height: 20px; display: flex; }
+.export-width-btn .wicon-svg { width: 20px; height: 20px; }
+.export-width-btn .wicon-restore { display: none; }
+.export-width-btn.full .wicon-expand { display: none; }
+.export-width-btn.full .wicon-restore { display: flex; }
+/* 导出页内：悬浮目录（复刻编辑器 .toc-float-btn 样式） */
+.export-toc-btn {
+  position: fixed; right: 20px; top: 100px; width: 44px; height: 44px;
+  background: var(--surface, #f5f2f1); border: 1px solid var(--border, rgba(0,0,0,0.1));
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--accent, #e8859b); opacity: 0.6;
+  transition: all 0.2s ease; z-index: 100; box-shadow: var(--shadow, 0 4px 12px rgba(0,0,0,0.05));
+}
+.export-toc-btn:hover { opacity: 1; background: var(--accent-soft, rgba(232,133,155,0.15)); transform: scale(1.1); }
+.export-toc-btn.open { opacity: 1; background: var(--accent, #e8859b); color: #fff; }
+.export-toc-btn svg { width: 20px; height: 20px; }
+.export-toc-panel {
+  position: absolute; right: 0; top: calc(100% + 8px); width: 240px; max-height: 70vh;
+  overflow-y: auto; background: var(--surface, #f5f2f1); border: 1px solid var(--border, rgba(0,0,0,0.1));
+  border-radius: 14px; box-shadow: var(--shadow-lg, 0 10px 30px rgba(0,0,0,0.1));
+  opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.25s ease; overflow: hidden;
+}
+.export-toc-btn.open .export-toc-panel { opacity: 1; visibility: visible; transform: translateY(0); }
+.export-toc-header { padding: 12px 16px; font-size: 14px; font-weight: 700; color: var(--text, #443a3e); border-bottom: 1px solid var(--border, rgba(0,0,0,0.1)); background: var(--accent-soft, rgba(232,133,155,0.1)); }
+.export-toc-content { max-height: 400px; overflow-y: auto; padding: 8px 0; }
+.export-toc-content ul { list-style: none; padding: 0; margin: 0; }
+.export-toc-content li { margin: 0; padding: 0; }
+.export-toc-content a { display: block; padding: 6px 16px; font-size: 13px; color: var(--text-semi, #7b6c71); text-decoration: none !important; border-bottom: none !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: background 0.15s ease, color 0.15s ease; border-radius: 0 !important; }
+.export-toc-content a:hover { background: var(--accent-soft, rgba(232,133,155,0.1)) !important; color: var(--accent, #e8859b) !important; }
+.export-toc-content a.active { color: var(--accent, #e8859b) !important; font-weight: 600; background: var(--accent-soft, rgba(232,133,155,0.12)) !important; }
+.export-toc-content .toc-level-2 { padding-left: 12px; }
+.export-toc-content .toc-level-3 { padding-left: 24px; }
+.export-toc-content .toc-level-4 { padding-left: 36px; }
+.export-toc-content .toc-level-5 { padding-left: 48px; }
+.export-toc-content .toc-level-6 { padding-left: 60px; }
+/* 导出悬浮目录内的 mark/code 与正文预览区保持一致（独立于 .markdown-body，需单独定义） */
+.export-toc-content mark { background: linear-gradient(120deg, rgba(var(--accent-rgb), 0.25), rgba(var(--accent-rgb), 0.12)); color: inherit; padding: 0.12em 0.26em; border-radius: 9px; border: 1px solid rgba(var(--accent-rgb), 0.32); }
+.export-toc-content code { font-family: var(--font-mono); font-size: 0.88em; padding: 0.2em 0.45em; border-radius: 7px; background: rgba(var(--accent-rgb), 0.14); color: var(--accent); font-weight: 600; border: 1px solid rgba(var(--accent-rgb), 0.32); }
+#write.markdown-body.full-width { max-width: 100% !important; margin-left: 0; margin-right: 0; }
+/* 导出页内：图片点击查看 lightbox（与渲染窗口一致） */
+.img-lightbox-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.86); display: none; align-items: center; justify-content: center; z-index: 9999; overflow: hidden; touch-action: none; }
+.img-lightbox-overlay.open { display: flex; }
+.img-lightbox-img { max-width: 90%; max-height: 90%; transform-origin: center center; cursor: grab; user-select: none; -webkit-user-drag: none; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+.img-lightbox-img.grabbing { cursor: grabbing; }
+.img-lightbox-toolbar {
+  position: absolute; top: 16px; right: 16px;
+  box-sizing: border-box;
+  display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end;
+  gap: 16px; row-gap: 8px;
+  max-width: calc(100vw - 32px);
+  padding: 10px 12px;
+  background: rgba(22, 22, 26, 0.55);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
+  z-index: 10000;
+}
+.img-lb-group { display: flex; align-items: center; gap: 8px; }
+.img-lb-sep { flex: 0 0 auto; width: 1px; align-self: stretch; min-height: 22px; background: rgba(255, 255, 255, 0.16); }
+.img-lb-btn {
+  box-sizing: border-box; flex: 0 0 auto;
+  width: 40px; height: 40px; min-width: 40px; border-radius: 11px;
+  border: none; background: rgba(255, 255, 255, 0.08);
+  color: #fff; cursor: pointer; padding: 0; font-size: 0; line-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.16s ease, transform 0.12s ease, color 0.16s ease, box-shadow 0.16s ease;
+}
+.img-lb-btn svg { width: 20px; height: 20px; flex: 0 0 auto; display: block; pointer-events: none; }
+.img-lb-btn:hover { background: rgba(255, 255, 255, 0.2); }
+.img-lb-btn:active { transform: scale(0.92); background: rgba(255, 255, 255, 0.28); }
+.img-lb-btn:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.7); outline-offset: 2px; }
+.img-lb-btn.is-disabled { opacity: 0.4; pointer-events: none; cursor: default; }
+.img-lb-close {
+  background: rgba(229, 72, 77, 0.18);
+  color: #ff6b6b;
+  margin-left: 4px;
+}
+.img-lb-close:hover { background: rgba(229, 72, 77, 0.34); color: #ff8585; }
+.img-lb-close:active { transform: scale(0.92); background: rgba(229, 72, 77, 0.5); }
+@media (max-width: 560px) {
+  .img-lightbox-toolbar { gap: 10px; row-gap: 6px; padding: 8px; }
+  .img-lb-btn { width: 36px; height: 36px; min-width: 36px; }
+}
+.img-lb-mini { position: fixed; right: 20px; bottom: 20px; width: 220px; max-height: 240px; background: #111; border: 1px solid rgba(255,255,255,0.22); border-radius: 10px; overflow: hidden; z-index: 10001; box-shadow: 0 10px 34px rgba(0,0,0,0.55); cursor: move; }
+.img-lb-mini img { width: 100%; display: block; pointer-events: none; }
+.img-lb-mini-close { position: absolute; top: 4px; right: 4px; width: 24px; height: 24px; border: none; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; cursor: pointer; font-size: 13px; }
+.img-lb-counter { position: absolute; top: 16px; left: 16px; z-index: 10000; color: #fff; font-size: 14px; background: rgba(0,0,0,0.42); padding: 4px 12px; border-radius: 999px; pointer-events: none; }
+@media print { .export-width-btn, .export-toc-btn, .export-toc-panel { display: none !important; } }
+
+.markdown-body .toc { background: var(--surface, #f5f2f1); border: 1px solid var(--border, rgba(0,0,0,0.1)); border-radius: 14px; padding: 16px 20px; margin: 1.5em 0; }
+.markdown-body .toc ul { list-style: none; padding-left: 0; }
+.markdown-body .toc li { margin: 4px 0; }
+.markdown-body .toc a { color: var(--accent, #e8859b); text-decoration: none !important; border-bottom: none !important; border-radius: 0 !important; }
+.markdown-body .toc a:hover { text-decoration: underline !important; background: transparent !important; color: var(--accent, #e8859b) !important; border-bottom-color: transparent !important; }
+.markdown-body .toc-level-2 { padding-left: 1.2em; }
+.markdown-body .toc-level-3 { padding-left: 2.4em; }
+.markdown-body .toc-level-4 { padding-left: 3.6em; }
+.markdown-body .toc-level-5 { padding-left: 4.8em; }
+.markdown-body .toc-level-6 { padding-left: 6em; }
+.markdown-body .toc mark { background: linear-gradient(120deg, rgba(var(--accent-rgb), 0.25), rgba(var(--accent-rgb), 0.12)); color: inherit; padding: 0.12em 0.26em; border-radius: 9px; border: 1px solid rgba(var(--accent-rgb), 0.32); }
+.markdown-body .toc code { font-family: var(--font-mono); font-size: 0.88em; padding: 0.2em 0.45em; border-radius: 7px; background: rgba(var(--accent-rgb), 0.14); color: var(--accent); font-weight: 600; border: 1px solid rgba(var(--accent-rgb), 0.32); }
+.markdown-body .mermaid { text-align: center; margin: 1.5em 0; background: var(--surface, #f5f2f1); border-radius: 14px; padding: 16px; }
+.markdown-body pre { background: var(--code-bg, #f5f2f1); border: 1px solid var(--border, rgba(0,0,0,0.1)); border-radius: 14px; padding: 16px 20px; overflow-x: auto; position: relative; }
+.markdown-body pre code { background: transparent; padding: 0; color: var(--code-ink, #443a3e); font-weight: normal; border: none; }
+.markdown-body code { font-family: var(--font-mono, monospace); font-size: 0.88em; padding: 0.2em 0.45em; border-radius: 7px; background: rgba(var(--accent-rgb, 232,133,155), 0.14); color: var(--accent, #e8859b); font-weight: 600; border: 1px solid rgba(var(--accent-rgb, 232,133,155), 0.32); }
+.markdown-body table { width: 100%; margin: 2em 0; }
+.markdown-body th, .markdown-body td { padding: 0.75em 1em; }
+.markdown-body th { text-align: left; font-weight: 600; }
+.markdown-body blockquote { margin: 1.5em 0; padding: 1em 1.25em; background: rgba(var(--accent-rgb, 232,133,155), 0.08); border-left: 4px solid var(--accent, #e8859b); border-radius: 14px; }
+.markdown-body h1::after, .markdown-body h2::after { content: ""; display: block; width: 76px; height: 3px; background: linear-gradient(90deg, rgba(var(--accent-rgb, 232,133,155), 0.45), transparent); border-radius: 999px; margin-top: 0.3em; }
+.markdown-body h3::after { content: ""; display: block; width: 44px; height: 2px; background: linear-gradient(90deg, rgba(var(--accent-rgb, 232,133,155), 0.32), transparent); border-radius: 999px; margin-top: 0.2em; }
+.markdown-body ul, .markdown-body ol { padding-left: 1.5em; margin: 1em 0; }
+.markdown-body li { margin: 0.5em 0; }
+:where(hr) { border: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--border-semi, rgba(0,0,0,0.15)), transparent); margin: 2em 0; }
+.markdown-body img { max-width: 100%; height: auto; border-radius: 14px; display: block; margin: 1.5em auto; }
+.markdown-body mark { background: rgba(var(--accent-rgb, 232,133,155), 0.18); padding: 0.1em 0.3em; border-radius: 5px; }
+.markdown-body u { text-decoration: none; border-bottom: 2px wavy var(--accent, #e8859b); padding-bottom: 1px; }
+.markdown-body kbd { font-family: var(--font-mono, monospace); font-size: 0.82em; padding: 0.15em 0.4em; border: 1px solid var(--border, rgba(0,0,0,0.15)); border-bottom-width: 2px; background: var(--bg, #faf8f7); border-radius: 6px; }
+.markdown-body .task-list-item { list-style-type: none; padding-left: 0; margin-left: -1.5em; }
+.markdown-body .task-list-item input { margin-right: 0.6em; accent-color: var(--accent, #e8859b); }
+.table-scroll-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 2em 0; }
+.table-scroll-wrapper table { margin: 0; width: auto; min-width: 100%; }
+#write, #write p, #write li { overflow-wrap: break-word; word-break: break-word; }
+#write a { overflow-wrap: break-word; word-break: break-word; }
+html, body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+@media (max-width: 768px) {
+  #write { line-height: 1.65; padding: 14px 12px !important; margin: 10px auto !important; border-radius: 12px; }
+  #write pre { overflow-x: auto !important; padding: 22px 14px !important; }
+  #write th, #write td { padding: 0.5em 0.6em; white-space: nowrap; }
+  #write blockquote { padding: 12px 14px; }
+  .export-toc-panel { max-width: 90vw; }
+}
+@media (max-width: 480px) {
+  #write { padding: 10px 8px !important; }
+}
+@page { margin: 12mm 12mm 12mm 12mm; }
+@media print {
+  /* 强制打印背景与主题色（最核心：否则深色纸面/代码底在打印时丢失变白底浅字） */
+  html, body, #write, #write * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  /* 消除 #write 顶部 margin 在首页被裁掉造成的上边距不一致（改由 @page 统一控制） */
+  #write { margin-top: 0 !important; }
+  #write > :first-child { margin-top: 0 !important; }
+  /* 深色等带卡片圆角的主题：打印时去掉 #write 圆角，避免首页顶部出现两个小圆角 */
+  #write { border-radius: 0 !important; }
+  /* 整页主题底色铺在 html 上（逐页重复、铺满整页，根绝横条）；body 透明，不抢 #write 卡片底色 */
+  html {
+    background: var(--bg, var(--ai-bg-app, var(--ai-bg-paper, #f7f3f0))) !important;
+  }
+  body {
+    background: transparent !important;
+    background-image: none !important;
+  }
+  /* 链接保留主题色并强制下划线，打印时更易辨识 */
+  #write a {
+    text-decoration: underline !important;
+  }
+  /* 短元素尽量整体不切，避免跨页被切断后背景错位 */
+  #write table, #write pre, #write .md-fences, #write blockquote, #write .mermaid {
+    break-inside: avoid-page;
+  }
+}
+</style>
+<link rel="stylesheet" href="https://maozuxiao.github.io/Streamax/Tools/KattyBB_MD_Editor/css/themes/animal-island.css">
+</head>
+<body>
+<div id="write" class="markdown-body">
+<h1 id="额尔古纳河右岸-人物关系对照表">《额尔古纳河右岸》人物关系对照表</h1>
+<blockquote>
+<p>作者：迟子建 ｜ 茅盾文学奖作品<br>说明：本表按<strong>思维导图大纲模式</strong>组织，直接用 <code># / ## / ### / ####</code> 层级与缩进列表，可导入 XMind、幕布、Markmap、Obsidian 等工具。<br>文中"我"为叙述者，全书未给出其姓名（"我不想留下名字了"）。</p>
+</blockquote>
+<h2 id="一-叙事坐标">一、叙事坐标</h2>
+<h3 id="1-1-叙述者">1.1 叙述者</h3>
+<ul>
+<li><strong>我</strong>：鄂温克女人，九十岁，"我们这个民族最后一个酋长的女人"<ul>
+<li>出生在冬天，出生当日父亲林克猎到黑熊、取出上好熊胆</li>
+<li>幼时被父亲唤作"小乌娜吉"（姐姐列娜为"大乌娜吉"，弟弟鲁尼为"乌特"）</li>
+<li>在岩石上画画（伊马其河畔 / 温都翁河岩画）</li>
+<li>下山表决时把桦树皮<strong>投进火塘</strong>（唯一反对者）</li>
+<li>结局：与孙子安草儿留守山林，嘱其把自己葬在树上、风中</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-叙事结构-一日四时">1.2 叙事结构（一日四时）</h3>
+<ul>
+<li><strong>清晨</strong>：我的出生、父辈的爱情与死亡</li>
+<li><strong>正午</strong>：日军侵扰、萨满更替、我的两次婚姻</li>
+<li><strong>黄昏</strong>：定居、文革、山林开发、亲人接连离世</li>
+<li><strong>半个月亮</strong>：下山与留守的最后抉择</li>
+</ul>
+<h3 id="1-3-核心冲突">1.3 核心冲突</h3>
+<ul>
+<li>山林文明 ↔ 现代定居（布苏 / 激流乡）</li>
+<li>萨满的"救一人、失一人"宿命</li>
+<li>驯鹿、火种、额尔古纳河：民族记忆的三重象征</li>
+</ul>
+<hr>
+<h2 id="二-血缘谱系-七大支系">二、血缘谱系（七大支系）</h2>
+<h3 id="2-1-林克-达玛拉-我的本家">2.1 林克 × 达玛拉（我的本家）</h3>
+<ul>
+<li><strong>林克</strong>（父亲，阿玛）<ul>
+<li>氏族最好的猎手，爱枪"仅次于爱达玛拉"</li>
+<li>与兄尼都萨满比箭射"猴头蘑"，赢了达玛拉</li>
+<li><strong>死于雷电</strong>：去阿巴河换驯鹿归途，经密松林时被雷击（同时击断两棵大树），风葬</li>
+</ul>
+</li>
+<li><strong>达玛拉</strong>（母亲，额尼）<ul>
+<li>全乌力楞最能干的女人，爱穿灰裙、爱跳"斡日切"舞</li>
+<li>头绾发髻，插月白色鹿骨簪子</li>
+<li><strong>死</strong>：林克死后疯癫，在鲁尼与妮浩的婚礼篝火旁穿羽毛裙子跳舞至黎明，仰面倒地而亡</li>
+</ul>
+</li>
+<li><strong>子女</strong><ul>
+<li>长女（无名）：出生两天因风寒夭折，装白布口袋扔向阳山坡</li>
+<li>次女 <strong>列娜</strong>：骑驯鹿时睡着滑落，<strong>在睡梦中被冻死</strong></li>
+<li>三女 <strong>我</strong>（叙述者）</li>
+<li>四女（无名）：出生不到一天夭折</li>
+<li>子 <strong>鲁尼</strong>（见 2.5）</li>
+</ul>
+</li>
+<li><strong>尼都萨满</strong>（伯父，额格都阿玛）<ul>
+<li>林克的哥哥、乌力楞族长，孤身一人</li>
+<li>深爱达玛拉，为氏族规矩所禁（兄死弟可娶嫂，弟死兄不可娶弟媳）</li>
+<li>用两年收集的山鸡羽毛为达玛拉缝制羽毛裙</li>
+<li><strong>死</strong>：为吉田治愈腿伤、战马代死之后，一路丢弃鼓槌、神鼓、神衣、神裙，倒地而亡</li>
+</ul>
+</li>
+<li><strong>依芙琳</strong>（姑姑，林克的姐妹）→ 见 2.4</li>
+<li><strong>那吉勒耶业</strong>（外祖父）：送女儿达玛拉"一团火"，即我终生守护的火种</li>
+<li><strong>祖父</strong>（无名）：令二子比箭定亲；死于尼都萨满继任萨满时另一氏族萨满跳神之时</li>
+<li><strong>猎犬伊兰</strong>：伊兰＝"光线"；林克死后独归报信，达玛拉求情免于殉葬</li>
+</ul>
+<h3 id="2-2-伊万-娜杰什卡-跨国之家">2.2 伊万 × 娜杰什卡（跨国之家）</h3>
+<ul>
+<li><strong>伊万</strong>（伯祖父额格都亚耶之子，与林克同辈）<ul>
+<li>个矮脸黑，额头一颗红豆似的红痣（易招熊，两次从熊掌下逃生）</li>
+<li>手能攥碎鹅卵石、折断松木；氏族铁匠</li>
+<li>用皮张从俄国安达手中换回娜杰什卡，握扁铁酒壶吓退安达</li>
+<li>娜杰什卡走后拒不再娶："我的生命中只有一个女人"</li>
+<li>越狱 → 抗联向导 → 解放军 → 转业满归；<strong>死</strong>：1968 年因"苏修特务"嫌疑被造反派抓捕，怒咬断两根手指，救回后吐血两天而亡；土葬、头朝额尔古纳河、坟前立十字架</li>
+</ul>
+</li>
+<li><strong>娜杰什卡</strong>（俄国人）<ul>
+<li>被继母卖给安达去做妓女，途中遭安达奸污</li>
+<li>既信玛鲁神又拜圣母，胸前划十字（依芙琳最瞧不起她）</li>
+<li>由达玛拉教会熟皮子、晒肉干等女活</li>
+<li><strong>结局</strong>：日本人来那年带吉兰特、娜拉逃回额尔古纳河左岸，下落不明</li>
+</ul>
+</li>
+<li><strong>子女</strong><ul>
+<li><strong>吉兰特</strong>（子，蓝眼睛）：喜做女人活计，文弱</li>
+<li><strong>娜拉</strong>（女）：最会染布（都柿染蓝、红豆染水红、百合染粉）；留给我一块粉布做嫁衣滚边</li>
+</ul>
+</li>
+<li><strong>额格都亚耶</strong>（伊万之父）：因伊万娶娜杰什卡、蓝眼睛的吉兰特出世而<strong>吐血三天气死</strong></li>
+</ul>
+<h3 id="2-3-老达西-哈谢-玛利亚-达西-杰芙琳娜">2.3 老达西—哈谢 × 玛利亚—达西 × 杰芙琳娜</h3>
+<ul>
+<li><strong>老达西</strong>（哈谢之父）<ul>
+<li>为救驯鹿仔赤手打死母狼，被小狼咬断一条腿</li>
+<li>畏光畏雪、不剃发不剃须，日夜盼"奥木列"（孙子）</li>
+<li>把哈谢捉来的山鹰训练成猎鹰，也唤作<strong>奥木列</strong></li>
+<li><strong>死</strong>：带猎鹰出营与狼搏斗，狼死，他与鹰重伤后被狼群吃掉；与鹰同葬</li>
+</ul>
+</li>
+<li><strong>哈谢</strong>（老达西之子）<ul>
+<li>捕鱼能手（凿冰眼、持鱼叉）；在斯特若衣查节与玛利亚订婚</li>
+<li>曾被召去东大营受训</li>
+<li><strong>死</strong>：七十岁踩到"黏蘑"滑倒骨折，拒送卫生院，"我要把骨头扔在山里"，三日而亡</li>
+</ul>
+</li>
+<li><strong>玛利亚</strong>（哈谢之妻）<ul>
+<li>长期不孕，见血即哭（锯鹿茸时必哭）；吃罗林斯基的药无效</li>
+<li>老达西死后突然"重病"实为怀孕，生下男孩取名<strong>达西</strong></li>
+<li>逼达西为金得守孝三年才许娶杰芙琳娜；长期虐待杰芙琳娜致其流产</li>
+<li><strong>死</strong>：1959 年初冬病故，临死拉着杰芙琳娜的手，<strong>睁着眼睛走的</strong></li>
+</ul>
+</li>
+<li><strong>小达西</strong>（哈谢之子，随祖父之名）<ul>
+<li>十四岁入东大营受训，偷渡左岸侦察苏联铁路七天，获土黄色棉大衣</li>
+<li>在金得火葬现场向刚守寡的杰芙琳娜跪地求婚，守孝三年后成婚</li>
+<li><strong>死</strong>：1968 年被造反派打断一条腿；1972 年秋剥野鹿皮后用猎枪自杀</li>
+</ul>
+</li>
+<li><strong>杰芙琳娜</strong>（先嫁金得，后嫁达西）<ul>
+<li>能干温和、嘴角微歪；金得婚礼当日即守寡</li>
+<li>受玛利亚罚跪毒打、被迫滚坡流产后再不孕</li>
+<li><strong>死</strong>：达西自杀后，抱其头颅舔净血迹，采毒蘑吃下殉情，与达西合葬</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-坤得-依芙琳-金得">2.4 坤得 × 依芙琳 → 金得</h3>
+<ul>
+<li><strong>依芙琳</strong>（我的姑姑）<ul>
+<li>手艺最好（做靴子）、爱抽烟、嘴毒、讲故事的人</li>
+<li>歪鼻子（四岁追灰鼠撞树折了鼻梁骨）</li>
+<li>全书"历史与规矩"的解说者：民族迁徙、左岸失地、氏族婚俗</li>
+<li>金得死后遭坤得鞭挞报复；1945 年冬怀孕后驾滑雪板一天自行流产报复坤得</li>
+<li><strong>死</strong>：1969 年夏为玛克辛姆颈上烂疮"画圈吹气"九次，吹完最后一口气倒在篝火旁而亡</li>
+</ul>
+</li>
+<li><strong>坤得</strong>（依芙琳之夫，入赘）<ul>
+<li>原爱阿巴河边一位蒙族姑娘，被迫娶依芙琳，终生冷落她</li>
+<li>东大营因走步出错被铃木秀男放狼狗撕咬，被伊万救下</li>
+<li><strong>死</strong>：1969 年夏被安草儿捉来的一只黑蜘蛛<strong>吓死</strong></li>
+</ul>
+</li>
+<li><strong>金得</strong>（依芙琳之子）<ul>
+<li>相中妮浩，被鲁尼抢先后当众落泪，遭母亲捆在树上抽打</li>
+<li>被逼娶歪嘴的杰芙琳娜</li>
+<li><strong>死</strong>：婚礼当日敬酒后离去，<strong>吊死在一棵枯松树上</strong>；按族规与那棵树一同火葬</li>
+<li>妮浩同日为他主持婚礼与葬礼</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-5-鲁尼-妮浩-子女死亡最惨重的一支">2.5 鲁尼 × 妮浩（子女死亡最惨重的一支）</h3>
+<ul>
+<li><strong>鲁尼</strong>（我的弟弟，后任族长）<ul>
+<li>像父亲一样爱枪，百发百中；在妮浩即将离开时当众求婚，三日后把她"当猎物"抢回成亲</li>
+<li><strong>死</strong>：妮浩死后约半年，喝着茶说"给我拿块糖来吧"，脖子一歪气绝</li>
+</ul>
+</li>
+<li><strong>妮浩</strong>（阿来克之女，尼都萨满之后的萨满 → 详见第五节）<ul>
+<li>捡起尼都萨满丢弃的法器神衣；康德九年被神选中，由杰拉萨满主持出道</li>
+<li>每次跳神救活一人，便失去自己的一个孩子</li>
+<li><strong>死</strong>：1998 年春跳神求雨成功，雨中未唱完神歌即倒地而亡</li>
+</ul>
+</li>
+<li><strong>六个孩子</strong><ul>
+<li><strong>果格力</strong>：妮浩救何宝林之子时，爬上最高松树捉乌鸦坠落身亡</li>
+<li><strong>交库托坎</strong>（百合花）：随柳莎采都柿时撞上马蜂窝，<strong>被马蜂蜇死</strong></li>
+<li><strong>耶尔尼斯涅</strong>（黑桦树）：十岁追畸形白鹿仔，<strong>被金河洪水卷走淹死</strong></li>
+<li><strong>贝尔娜</strong>：恐惧母亲跳神而逃走；妮浩葬礼上归来，葬后再度失踪（结局不明）</li>
+<li><strong>玛克辛姆</strong>：存活；妮浩死后第三年出现萨满征兆（割腕、吞火炭、雨天奔跑），被隔绝神衣后渐趋正常</li>
+<li><strong>未命名男婴</strong>：1960 年 8 月死产，妮浩救偷鹿少年所付出的代价；唯一没有名字的孩子</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-6-我的两任丈夫与后代">2.6 我的两任丈夫与后代</h3>
+<ul>
+<li><strong>第一任丈夫 拉吉达</strong>（族长）<ul>
+<li>我迷山躲在"靠老宝"中，被他当成黑熊发现；"我的媒人是饥饿"</li>
+<li>守母孝三年后成婚，父亲送二十头驯鹿入赘</li>
+<li>任族长后把乌力楞分成小家庭、按人口均分兽肉</li>
+<li><strong>死</strong>：白灾中骑吉田留下的马独自寻鹿，连日奔波在马背上打盹<strong>被活活冻死</strong></li>
+</ul>
+</li>
+<li><strong>第二任丈夫 瓦罗加</strong>（"最后一个酋长"，识汉字、会写诗）<ul>
+<li>1945 年贝尔茨河畔相遇成婚；把部族一分为二（齐亚拉率二十余人独立）</li>
+<li>拒任激流乡乡长；1965 年去激流乡一冬即回山</li>
+<li><strong>死</strong>：1974 年夏送放映员途中，为救放映员与马粪包向母熊开枪，<strong>被母熊用前掌揭开头颅而死</strong></li>
+</ul>
+</li>
+<li><strong>我的子女与孙辈</strong><ul>
+<li><strong>维克特</strong>（子，拉吉达所生）<ul>
+<li>妻柳莎（马粪包之女）→ 子<strong>九月</strong></li>
+<li>1964 年秋用叫鹿筒诱鹿时<strong>误将弟弟安道尔当野鹿开枪打死</strong>，此后终日酗酒</li>
+<li><strong>死</strong>：1976 年酗酒过度而亡，葬在伊万身边</li>
+</ul>
+</li>
+<li><strong>安道尔</strong>（子，拉吉达所生）<ul>
+<li>性情痴愚忠厚；1959 年深秋被迫娶瓦霞</li>
+<li><strong>死</strong>：1964 年被哥哥维克特误杀；此后全族不再用叫鹿筒、不再接近列斯元科山</li>
+</ul>
+</li>
+<li><strong>达吉亚娜</strong>（女，瓦罗加所生，1946 年秋生）<ul>
+<li>夫<strong>索长林</strong>（氏族神枪手）→ 女<strong>依莲娜</strong>、<strong>索玛</strong></li>
+<li>1965 年十九岁热衷新生活而去激流乡；依莲娜死后牵头联名建议下山定居</li>
+<li>把妮浩神衣神帽神裙捐给激流乡民俗博物馆</li>
+</ul>
+</li>
+<li><strong>孙辈</strong><ul>
+<li><strong>九月</strong>（维克特之子，1956 年 9 月生）：激流乡邮局乡邮员；妻<strong>林金橘</strong>（汉族，商店售货员）</li>
+<li><strong>安草儿</strong>（安道尔之子，1960 年 6 月生）：愚痴善良、手巧爱干活；妻<strong>优莲</strong>；<strong>唯一与我留在山上的人</strong></li>
+<li><strong>依莲娜</strong>（达吉亚娜之女，1968 年生）：部落<strong>第一位大学生</strong>，北京美院毕业，呼和浩特报社美术编辑<ul>
+<li><strong>死</strong>：进入新世纪那年春天宣布画成，当夜酒后去贝尔茨河洗画笔<strong>落水溺亡</strong></li>
+</ul>
+</li>
+<li><strong>索玛</strong>（达吉亚娜之女，1978 年生）：厌学逃学，多次下山流产，诅咒驯鹿得瘟疫好让大家下山</li>
+<li><strong>西班</strong>（马伊堪之子，无血缘，当作孙辈抚养）→ 见 2.7</li>
+</ul>
+</li>
+<li><strong>曾孙辈</strong><ul>
+<li><strong>六月</strong>（九月 × 林金橘之子）</li>
+<li><strong>帕日格</strong>（意为"背夹"）、<strong>沙合力</strong>（意为"糖"）：安草儿与优莲的双胞胎<ul>
+<li>沙合力：酗酒闹事，纠人盗伐天然林卖黑材，<strong>判三年徒刑</strong>，结尾在狱中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>安草儿之妻 优莲</strong><ul>
+<li>相邻乌力楞的姑娘，因安草儿"心肠好"而愿嫁</li>
+<li><strong>死</strong>：生下双胞胎后大出血而死；安草儿守尸四日不肯下葬</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-7-拉吉米系-无血缘的亲缘">2.7 拉吉米系（无血缘的亲缘）</h3>
+<ul>
+<li><strong>拉吉米</strong>（拉吉达最小的弟弟，我的小叔子）<ul>
+<li>家族十六口全部死于黄病，三岁时只剩他一人，被我接来抚养</li>
+<li>握着父亲留下的口弦琴<strong>木库莲</strong>；向达西学骑马</li>
+<li>东大营被铃木秀男识破（因吹木库莲），给吉田当马夫</li>
+<li>1945 年苏军轰炸时马受惊狂奔，<strong>阴囊撕裂、睾丸颠碎，失去男儿身</strong></li>
+<li>此后拒绝一切提亲；<strong>结尾随西班去布苏</strong></li>
+</ul>
+</li>
+<li><strong>马伊堪</strong>（拉吉米养女，实为扎兰屯大地主之女）<ul>
+<li>1950 年夏被马贩子遗弃在乌启罗夫客栈马厩，由一匹银灰色马护着，瓦罗加起名</li>
+<li>高平路多次求婚被拉吉米拒绝</li>
+<li><strong>死</strong>：1980 年三十岁失踪五日后归来并怀孕，冬天生下西班；<strong>西班两岁断奶后跳崖自杀</strong></li>
+</ul>
+</li>
+<li><strong>西班</strong>（马伊堪之子，生父不明）<ul>
+<li>从小啃树皮；<strong>造鄂温克文字</strong>、制作桦皮"玛塔"工艺品走俏于游客</li>
+<li>为拉吉米雕刻柞树犄角痰盂</li>
+<li>阻止玛克辛姆射杀灰鹤："得把这些灰鹤留给我和安草儿"</li>
+<li><strong>下山去布苏</strong>（我原以为他不会走）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="三-人物简介对照表">三、人物简介对照表</h2>
+<h3 id="3-1-核心家族成员">3.1 核心家族成员</h3>
+<div class="table-scroll-wrapper"><table>
+<thead>
+<tr>
+<th>姓名</th>
+<th>身份</th>
+<th>与"我"的关系</th>
+<th>一句话简介</th>
+<th>结局</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>我</td>
+<td>鄂温克女人、岩画者</td>
+<td>叙述者</td>
+<td>九十岁，最后一个酋长的女人，唯一的反对票</td>
+<td>与安草儿留守山林</td>
+</tr>
+<tr>
+<td>林克</td>
+<td>猎手</td>
+<td>父亲</td>
+<td>爱枪如命，比箭赢得达玛拉</td>
+<td>雷击而死</td>
+</tr>
+<tr>
+<td>达玛拉</td>
+<td>最能干的女人</td>
+<td>母亲</td>
+<td>爱裙、爱舞、爱白桦树</td>
+<td>跳舞至黎明倒地而亡</td>
+</tr>
+<tr>
+<td>尼都萨满</td>
+<td>萨满、族长</td>
+<td>伯父（额格都阿玛）</td>
+<td>深爱弟媳达玛拉，为氏族所禁</td>
+<td>跳神后弃法器倒地而亡</td>
+</tr>
+<tr>
+<td>列娜</td>
+<td>—</td>
+<td>姐姐</td>
+<td>罗林斯基最偏爱的"大乌娜吉"</td>
+<td>睡梦中冻死</td>
+</tr>
+<tr>
+<td>鲁尼</td>
+<td>猎手、族长</td>
+<td>弟弟</td>
+<td>当众抢回妮浩做新娘</td>
+<td>妮浩死后半年气绝</td>
+</tr>
+<tr>
+<td>依芙琳</td>
+<td>姑姑</td>
+<td>姑姑</td>
+<td>歪鼻子、嘴毒、氏族历史的讲述者</td>
+<td>为孙辈治疮吹气而亡</td>
+</tr>
+<tr>
+<td>坤得</td>
+<td>猎手</td>
+<td>姑父</td>
+<td>被迫娶依芙琳，终生冷落她</td>
+<td>被蜘蛛吓死</td>
+</tr>
+<tr>
+<td>金得</td>
+<td>—</td>
+<td>表弟</td>
+<td>单恋妮浩，被逼成婚</td>
+<td>婚礼当日自缢</td>
+</tr>
+<tr>
+<td>伊万</td>
+<td>铁匠、抗联向导</td>
+<td>同辈（伯祖父之子）</td>
+<td>力大无穷，用皮张换回俄国妻子</td>
+<td>咬断手指后吐血而亡</td>
+</tr>
+<tr>
+<td>娜杰什卡</td>
+<td>俄国人</td>
+<td>伊万之妻</td>
+<td>被卖、被辱，由达玛拉教会女活</td>
+<td>带子女逃回左岸</td>
+</tr>
+<tr>
+<td>老达西</td>
+<td>猎手</td>
+<td>氏族长辈</td>
+<td>断腿于狼口，训鹰复仇</td>
+<td>与狼搏斗被狼群吃掉</td>
+</tr>
+<tr>
+<td>哈谢</td>
+<td>猎手</td>
+<td>同辈</td>
+<td>捕鱼能手，捉来山鹰</td>
+<td>骨折拒医而亡</td>
+</tr>
+<tr>
+<td>玛利亚</td>
+<td>—</td>
+<td>同辈</td>
+<td>久不孕，见血即哭</td>
+<td>睁着眼睛离世</td>
+</tr>
+<tr>
+<td>小达西</td>
+<td>猎手</td>
+<td>晚辈</td>
+<td>侦察兵，跪地向寡妇求婚</td>
+<td>猎枪自杀</td>
+</tr>
+<tr>
+<td>杰芙琳娜</td>
+<td>—</td>
+<td>晚辈</td>
+<td>一日之间新娘变寡妇</td>
+<td>食毒蘑殉情</td>
+</tr>
+<tr>
+<td>拉吉达</td>
+<td>族长</td>
+<td>第一任丈夫</td>
+<td>在"靠老宝"下发现迷山的我</td>
+<td>马背上冻死</td>
+</tr>
+<tr>
+<td>瓦罗加</td>
+<td>酋长、"诗人"</td>
+<td>第二任丈夫</td>
+<td>识汉字、会写诗，拒任乡长</td>
+<td>被母熊揭开头颅而死</td>
+</tr>
+<tr>
+<td>维克特</td>
+<td>猎民</td>
+<td>儿子</td>
+<td>误杀弟弟后终生酗酒</td>
+<td>酗酒而死</td>
+</tr>
+<tr>
+<td>安道尔</td>
+<td>猎民</td>
+<td>儿子</td>
+<td>痴愚忠厚，被迫娶瓦霞</td>
+<td>被哥哥误杀</td>
+</tr>
+<tr>
+<td>达吉亚娜</td>
+<td>—</td>
+<td>女儿</td>
+<td>山下定居的推动者</td>
+<td>迁往布苏</td>
+</tr>
+<tr>
+<td>柳莎</td>
+<td>—</td>
+<td>儿媳</td>
+<td>马粪包之女，月圆日会哭泣</td>
+<td>迁往布苏</td>
+</tr>
+<tr>
+<td>瓦霞</td>
+<td>—</td>
+<td>儿媳</td>
+<td>比安道尔大三岁，不情愿成婚</td>
+<td>随马贩子出走，结局不明</td>
+</tr>
+<tr>
+<td>安草儿</td>
+<td>猎民</td>
+<td>孙子</td>
+<td>愚痴善良、手巧爱干活</td>
+<td>与我留守山上</td>
+</tr>
+<tr>
+<td>优莲</td>
+<td>—</td>
+<td>孙媳</td>
+<td>因"心肠好"而嫁安草儿</td>
+<td>生双胞胎大出血而死</td>
+</tr>
+<tr>
+<td>依莲娜</td>
+<td>画家</td>
+<td>孙女</td>
+<td>部落第一位大学生</td>
+<td>酒后洗画笔溺亡</td>
+</tr>
+<tr>
+<td>索玛</td>
+<td>—</td>
+<td>孙女</td>
+<td>厌学叛逆</td>
+<td>经管驯鹿（不情愿）</td>
+</tr>
+<tr>
+<td>九月</td>
+<td>乡邮员</td>
+<td>孙子</td>
+<td>1956 年 9 月生，因月份得名</td>
+<td>在激流乡工作</td>
+</tr>
+<tr>
+<td>西班</td>
+<td>造字者</td>
+<td>无血缘（当作孙辈）</td>
+<td>造鄂温克文字、做桦皮工艺品</td>
+<td>随拉吉米去布苏</td>
+</tr>
+<tr>
+<td>拉吉米</td>
+<td>木库莲吹奏者</td>
+<td>小叔子</td>
+<td>阉割驯鹿的一把好手，非男儿身</td>
+<td>迁往布苏</td>
+</tr>
+<tr>
+<td>马伊堪</td>
+<td>—</td>
+<td>拉吉米养女</td>
+<td>被遗弃的女婴，绝色</td>
+<td>跳崖自杀</td>
+</tr>
+<tr>
+<td>妮浩</td>
+<td>萨满</td>
+<td>弟媳</td>
+<td>救一人失一子的宿命</td>
+<td>求雨后倒地而亡</td>
+</tr>
+</tbody>
+</table>
+</div><h3 id="3-2-外来者与时代符号">3.2 外来者与时代符号</h3>
+<div class="table-scroll-wrapper"><table>
+<thead>
+<tr>
+<th>姓名</th>
+<th>身份</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>罗林斯基</td>
+<td>俄国安达</td>
+<td>红胡子矮胖子，肩有青蛇文身；偏爱列娜，从不黑心。后被马拖死，山涧命名"罗林斯基沟"</td>
+</tr>
+<tr>
+<td>图卢科夫</td>
+<td>俄国安达</td>
+<td>外号"达黑"（鲇鱼），嘴大狡猾，克扣猎品；吓走蓝眼睛的人</td>
+</tr>
+<tr>
+<td>大胡子安达</td>
+<td>俄国商人</td>
+<td>贩卖俄国姑娘去漠河妓院，奸污娜杰什卡</td>
+</tr>
+<tr>
+<td>许财发 / 许荣达</td>
+<td>汉商父子</td>
+<td>乌启罗夫供销合作社经营者，讲土改、斗地主</td>
+</tr>
+<tr>
+<td>吉田</td>
+<td>日本上尉</td>
+<td>东大营长官，以战马为代价求尼都萨满治腿伤；1945 年剖腹自杀</td>
+</tr>
+<tr>
+<td>王录</td>
+<td>翻译</td>
+<td>好心人，多次替猎民掩饰；战后以汉奸罪判十年</td>
+</tr>
+<tr>
+<td>路德</td>
+<td>向导</td>
+<td>被依芙琳骂作"日本人的活地图"；以汉奸罪判七年</td>
+</tr>
+<tr>
+<td>铃木秀男</td>
+<td>日军军官</td>
+<td>设"关东军栖林训练营"，放狼狗咬坤得、鞭打伊万；战俘时期自断腿以求遣返</td>
+</tr>
+<tr>
+<td>杰拉萨满</td>
+<td>另一氏族老萨满</td>
+<td>为妮浩主持新萨满出道仪式，跳神三天</td>
+</tr>
+<tr>
+<td>何宝林</td>
+<td>求医者</td>
+<td>其子被妮浩救活，代价是果格力之死</td>
+</tr>
+<tr>
+<td>高平路</td>
+<td>小学教师</td>
+<td>"秀才"，向达吉亚娜求婚未果；见马伊堪落泪</td>
+</tr>
+<tr>
+<td>刘书记 / 陈副乡长</td>
+<td>激流乡干部</td>
+<td>动员定居、普查人口，劝做"社会主义新猎民"</td>
+</tr>
+<tr>
+<td>张兽医</td>
+<td>兽医</td>
+<td>圈养驯鹿喂草料失败，被骂作"魔鬼"</td>
+</tr>
+<tr>
+<td>齐格达</td>
+<td>激流乡乡长</td>
+<td>率猎民逼造反派放人救回伊万，因此被革职；后误入陷阱摔死</td>
+</tr>
+<tr>
+<td>马粪包</td>
+<td>酒鬼（柳莎之父）</td>
+<td>被熊骨卡喉由妮浩救活后自阉；扫射运材车轮胎被打死</td>
+</tr>
+<tr>
+<td>刘博文</td>
+<td>记者</td>
+<td>实为马伊堪的侄子，为依莲娜而来，揭开马伊堪身世</td>
+</tr>
+<tr>
+<td>放映员</td>
+<td>下放知识分子</td>
+<td>原大学历史系副教授；瓦罗加为他而死</td>
+</tr>
+<tr>
+<td>古书记</td>
+<td>乡党委书记</td>
+<td>"放下了猎枪的民族才是文明的民族"</td>
+</tr>
+</tbody>
+</table>
+</div><hr>
+<h2 id="四-婚姻-伴侣关系对照">四、婚姻 / 伴侣关系对照</h2>
+<div class="table-scroll-wrapper"><table>
+<thead>
+<tr>
+<th>男方</th>
+<th>女方</th>
+<th>成婚方式</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>林克</td>
+<td>达玛拉</td>
+<td>比箭射"猴头蘑"定胜负</td>
+<td>林克雷击死，达玛拉殉情般舞死</td>
+</tr>
+<tr>
+<td>尼都萨满</td>
+<td>达玛拉（未成）</td>
+<td>情感被氏族规矩禁止</td>
+<td>二人同年死去</td>
+</tr>
+<tr>
+<td>伊万</td>
+<td>娜杰什卡</td>
+<td>以皮张换回</td>
+<td>妻携子女逃回左岸</td>
+</tr>
+<tr>
+<td>坤得</td>
+<td>依芙琳</td>
+<td>父辈包办</td>
+<td>一生互相折磨</td>
+</tr>
+<tr>
+<td>哈谢</td>
+<td>玛利亚</td>
+<td>斯特若衣查节相遇订婚</td>
+<td>得子达西</td>
+</tr>
+<tr>
+<td>达西</td>
+<td>杰芙琳娜</td>
+<td>金得火葬现场跪地求婚，守孝三年</td>
+<td>达西自杀，妻殉情</td>
+</tr>
+<tr>
+<td>金得</td>
+<td>杰芙琳娜</td>
+<td>母亲强定婚期</td>
+<td>新郎当日自缢</td>
+</tr>
+<tr>
+<td>鲁尼</td>
+<td>妮浩</td>
+<td>当众求婚、三日后"抢亲"</td>
+<td>鲁尼随妮浩而去</td>
+</tr>
+<tr>
+<td>我</td>
+<td>拉吉达</td>
+<td>"我的媒人是饥饿"</td>
+<td>拉吉达冻死</td>
+</tr>
+<tr>
+<td>我</td>
+<td>瓦罗加</td>
+<td>1945 年贝尔茨河畔成婚</td>
+<td>瓦罗加死于熊掌</td>
+</tr>
+<tr>
+<td>维克特</td>
+<td>柳莎</td>
+<td>1955 年春金河畔婚礼</td>
+<td>维克特误杀弟弟后酗酒而死</td>
+</tr>
+<tr>
+<td>安道尔</td>
+<td>瓦霞</td>
+<td>不情愿的婚事</td>
+<td>安道尔被误杀，瓦霞出走</td>
+</tr>
+<tr>
+<td>安草儿</td>
+<td>优莲</td>
+<td>优莲因他"心肠好"而愿嫁</td>
+<td>优莲产后大出血而死</td>
+</tr>
+<tr>
+<td>九月</td>
+<td>林金橘</td>
+<td>1977 年秋成婚</td>
+<td>子六月</td>
+</tr>
+<tr>
+<td>达吉亚娜</td>
+<td>索长林</td>
+<td>放弃教师高平路，选神枪手</td>
+<td>女依莲娜、索玛</td>
+</tr>
+<tr>
+<td>依莲娜</td>
+<td>水泥厂工人 / 刘博文</td>
+<td>先结婚一年即离，后与记者同居</td>
+<td>依莲娜溺亡</td>
+</tr>
+<tr>
+<td>高平路</td>
+<td>马伊堪（未成）</td>
+<td>屡次求婚被拉吉米拒绝</td>
+<td>高平路另娶，不再上山</td>
+</tr>
+</tbody>
+</table>
+</div><hr>
+<h2 id="五-萨满传承链">五、萨满传承链</h2>
+<h3 id="5-1-传承顺序">5.1 传承顺序</h3>
+<ol>
+<li><strong>旧萨满</strong>（无名）→ 去世三年后，新萨满产生</li>
+<li><strong>尼都萨满</strong>（林克之兄）<ul>
+<li>为列娜跳神取"乌麦"，以一只灰色驯鹿仔代死</li>
+<li>主持林克风葬、鲁尼与妮浩婚礼</li>
+<li>死时：丢弃鼓槌、神鼓、神衣、神裙，倒地而亡</li>
+</ul>
+</li>
+<li><strong>妮浩</strong>（鲁尼之妻）<ul>
+<li>旧萨满去世第三年，由杰拉萨满主持出道仪式</li>
+<li>每次救人失去一子：果格力、未命名男婴（另有交库托坎、耶尔尼斯涅之死亦与之呼应）</li>
+<li>死时：1998 年求雨成功，雨中神歌未竟而亡</li>
+</ul>
+</li>
+<li><strong>玛克辛姆</strong>（妮浩之子）<ul>
+<li>出现萨满征兆（割腕、吞火炭、雨天奔跑、旱天大哭）</li>
+<li>族人藏起神衣神帽，隔绝其通神之路，最终趋向"正常"</li>
+<li><strong>萨满传统在此断绝</strong></li>
+</ul>
+</li>
+</ol>
+<h3 id="5-2-救一人-失一人-的代价">5.2 "救一人，失一人"的代价</h3>
+<ul>
+<li>救列娜 → 灰色驯鹿仔代死</li>
+<li>救何宝林十岁儿子 → 果格力坠树而死</li>
+<li>救马粪包（熊骨卡喉）→ 交库托坎被马蜂蜇死</li>
+<li>救偷鹿少年 → 未命名男婴死产</li>
+<li>救山中失明者、疥疮孩子、驯鹿瘟疫 → 尼都萨满自身的衰老与无能为力</li>
+</ul>
+<hr>
+<h2 id="六-死亡方式对照表">六、死亡方式对照表</h2>
+<div class="table-scroll-wrapper"><table>
+<thead>
+<tr>
+<th>人物</th>
+<th>死因</th>
+<th>时间 / 背景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>我的长姐（无名）</td>
+<td>风寒，活两天</td>
+<td>我出生前</td>
+</tr>
+<tr>
+<td>我的四妹（无名）</td>
+<td>出生不到一天</td>
+<td>达玛拉失血过多</td>
+</tr>
+<tr>
+<td>额格都亚耶</td>
+<td>被伊万气死，吐血三天</td>
+<td>吉兰特出生后</td>
+</tr>
+<tr>
+<td>列娜</td>
+<td>从驯鹿背滑落，睡梦中冻死</td>
+<td>搬迁途中</td>
+</tr>
+<tr>
+<td>老达西</td>
+<td>与狼搏斗，被狼群吃掉</td>
+<td>最严寒的时令</td>
+</tr>
+<tr>
+<td>猎鹰奥木列</td>
+<td>同上，与主人同葬</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>林克</td>
+<td>雷击</td>
+<td>去阿巴河换驯鹿归途</td>
+</tr>
+<tr>
+<td>达玛拉</td>
+<td>跳舞至黎明，倒地而亡</td>
+<td>鲁尼与妮浩婚礼</td>
+</tr>
+<tr>
+<td>尼都萨满</td>
+<td>跳神后弃法器倒地</td>
+<td>为吉田治愈腿伤后</td>
+</tr>
+<tr>
+<td>金得</td>
+<td>自缢于枯松</td>
+<td>婚礼当日</td>
+</tr>
+<tr>
+<td>拉吉达</td>
+<td>马背上睡着冻死</td>
+<td>白灾寻鹿</td>
+</tr>
+<tr>
+<td>果格力</td>
+<td>爬树捉乌鸦坠落</td>
+<td>妮浩救何宝林之子时</td>
+</tr>
+<tr>
+<td>耶尔尼斯涅</td>
+<td>追白鹿仔被金河洪水卷走</td>
+<td>1955 年春</td>
+</tr>
+<tr>
+<td>交库托坎</td>
+<td>被马蜂蜇死</td>
+<td>采都柿时</td>
+</tr>
+<tr>
+<td>未命名男婴</td>
+<td>死产</td>
+<td>1960 年 8 月</td>
+</tr>
+<tr>
+<td>罗林斯基</td>
+<td>被受惊的马拖死</td>
+<td>运货途中</td>
+</tr>
+<tr>
+<td>吉田</td>
+<td>剖腹自杀</td>
+<td>1945 年苏军进攻</td>
+</tr>
+<tr>
+<td>安道尔</td>
+<td>被哥哥维克特误当野鹿开枪打死</td>
+<td>1964 年秋</td>
+</tr>
+<tr>
+<td>玛利亚</td>
+<td>病故，"睁着眼睛走的"</td>
+<td>1959 年初冬</td>
+</tr>
+<tr>
+<td>哈谢</td>
+<td>骨折拒医，三日而亡</td>
+<td>七十岁那年</td>
+</tr>
+<tr>
+<td>伊万</td>
+<td>咬断两指后吐血两天</td>
+<td>1968 年夏</td>
+</tr>
+<tr>
+<td>齐格达</td>
+<td>误入捕兽陷阱摔死</td>
+<td>1968 年冬</td>
+</tr>
+<tr>
+<td>坤得</td>
+<td>被黑蜘蛛吓死</td>
+<td>1969 年夏</td>
+</tr>
+<tr>
+<td>依芙琳</td>
+<td>为孙辈吹气治疮，力竭而亡</td>
+<td>1969 年夏</td>
+</tr>
+<tr>
+<td>达西</td>
+<td>猎枪自杀</td>
+<td>1972 年秋</td>
+</tr>
+<tr>
+<td>杰芙琳娜</td>
+<td>食毒蘑殉情</td>
+<td>1972 年</td>
+</tr>
+<tr>
+<td>瓦罗加</td>
+<td>被母熊揭开头颅</td>
+<td>1974 年夏</td>
+</tr>
+<tr>
+<td>维克特</td>
+<td>酗酒过度</td>
+<td>1976 年</td>
+</tr>
+<tr>
+<td>马粪包</td>
+<td>扫射运材车轮胎被打死</td>
+<td>送记者下山途中</td>
+</tr>
+<tr>
+<td>马伊堪</td>
+<td>跳崖自杀</td>
+<td>1980 年，西班两岁后</td>
+</tr>
+<tr>
+<td>优莲</td>
+<td>生双胞胎大出血</td>
+<td>—</td>
+</tr>
+<tr>
+<td>鲁尼</td>
+<td>喝茶时脖颈一歪气绝</td>
+<td>妮浩死后约半年</td>
+</tr>
+<tr>
+<td>妮浩</td>
+<td>求雨成功后倒地而亡</td>
+<td>1998 年春</td>
+</tr>
+<tr>
+<td>依莲娜</td>
+<td>酒后河边洗画笔溺亡</td>
+<td>进入新世纪那年春天</td>
+</tr>
+<tr>
+<td>娜杰什卡 / 吉兰特 / 娜拉</td>
+<td>逃回左岸，下落不明</td>
+<td>日本人来的那年</td>
+</tr>
+<tr>
+<td>瓦霞 / 贝尔娜</td>
+<td>出走，结局原文未提</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</div><hr>
+<h2 id="七-时代坐标-对照人物命运">七、时代坐标（对照人物命运）</h2>
+<h3 id="7-1-三百多年前">7.1 三百多年前</h3>
+<ul>
+<li>俄军入侵，祖先自勒拿河（拉穆湖）迁至额尔古纳河右岸</li>
+<li>十二个氏族只剩六个（左岸成为永远的失地）</li>
+</ul>
+<h3 id="7-2-清末民初">7.2 清末民初</h3>
+<ul>
+<li>漠河金矿开办（光绪—李鸿章—李金镛）</li>
+<li>妓院兴起，俄国安达贩卖女子 → 娜杰什卡的命运伏笔</li>
+</ul>
+<h3 id="7-3-伪满-日军时期-康德年间">7.3 伪满 / 日军时期（康德年间）</h3>
+<ul>
+<li>日本人成立"满洲国"、满洲畜产株式会社（严重克扣）</li>
+<li>东大营"关东军栖林训练营"：铃木秀男强征十四岁以上男猎民</li>
+<li>娜杰什卡带子女逃亡；伊万越狱；拉吉米被毁；吉田自杀</li>
+</ul>
+<h3 id="7-4-建国后至文革">7.4 建国后至文革</h3>
+<ul>
+<li>1945 年：我与瓦罗加成婚，伊万以军人身份归来</li>
+<li>1950 年：乌启罗夫供销合作社成立；马伊堪被捡回</li>
+<li>1957 年起：林业工人进驻，伐木声响起</li>
+<li>1965 年：激流乡定居点建立，第二次大规模下山</li>
+<li>1968 年：文革，伊万、达西遭难</li>
+<li>1974 年：瓦罗加之死</li>
+</ul>
+<h3 id="7-5-改革开放至今">7.5 改革开放至今</h3>
+<ul>
+<li>1978 年后：依莲娜上大学，马伊堪之死，西班造字</li>
+<li>1998 年：妮浩求雨而死；大兴安岭大火（林业工人烟头所致）</li>
+<li>新世纪：依莲娜溺亡，达吉亚娜牵头联名，<strong>全体下山去布苏</strong></li>
+<li>结局：山上只剩我与安草儿，以及逃回营地的白色驯鹿木库莲</li>
+</ul>
+<hr>
+<h2 id="八-全书主题人物映射">八、全书主题人物映射</h2>
+<ul>
+<li><strong>火种</strong>：那吉勒耶业 → 达玛拉 → 我（"这团火就是我跳动的心"）</li>
+<li><strong>驯鹿</strong>：玛鲁王、驮火种的鹿、白色驯鹿木库莲（民族的命脉）</li>
+<li><strong>额尔古纳河</strong>：左岸是失地，右岸是新生；娜杰什卡的逃亡方向</li>
+<li><strong>名字的隐喻</strong><ul>
+<li>交库托坎（百合花）、耶尔尼斯涅（黑桦树）：花朵的名字会招引死亡</li>
+<li>奥木列（孙子）：既是期盼的孙儿，也是复仇的猎鹰</li>
+<li>帕日格（背夹）、沙合力（糖）：孪生兄弟，一舞一狱</li>
+</ul>
+</li>
+</ul>
+
+</div>
+<div class="export-toc-btn" id="exportTocBtn" title="目录" aria-label="目录"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M18 9a9 9 0 0 0-9 9"></path><path d="M6 15a9 9 0 0 0 9-9"></path></svg><div class="export-toc-panel" id="exportTocPanel"><div class="export-toc-content"><ul><li class="toc-level-1"><a href="#额尔古纳河右岸-人物关系对照表" title="《额尔古纳河右岸》人物关系对照表" onclick="exportTocGo('额尔古纳河右岸-人物关系对照表');return false;">《额尔古纳河右岸》人物关系对照表</a></li><li class="toc-level-2"><a href="#一-叙事坐标" title="一、叙事坐标" onclick="exportTocGo('一-叙事坐标');return false;">一、叙事坐标</a></li><li class="toc-level-3"><a href="#1-1-叙述者" title="1.1 叙述者" onclick="exportTocGo('1-1-叙述者');return false;">1.1 叙述者</a></li><li class="toc-level-3"><a href="#1-2-叙事结构-一日四时" title="1.2 叙事结构（一日四时）" onclick="exportTocGo('1-2-叙事结构-一日四时');return false;">1.2 叙事结构（一日四时）</a></li><li class="toc-level-3"><a href="#1-3-核心冲突" title="1.3 核心冲突" onclick="exportTocGo('1-3-核心冲突');return false;">1.3 核心冲突</a></li><li class="toc-level-2"><a href="#二-血缘谱系-七大支系" title="二、血缘谱系（七大支系）" onclick="exportTocGo('二-血缘谱系-七大支系');return false;">二、血缘谱系（七大支系）</a></li><li class="toc-level-3"><a href="#2-1-林克-达玛拉-我的本家" title="2.1 林克 × 达玛拉（我的本家）" onclick="exportTocGo('2-1-林克-达玛拉-我的本家');return false;">2.1 林克 × 达玛拉（我的本家）</a></li><li class="toc-level-3"><a href="#2-2-伊万-娜杰什卡-跨国之家" title="2.2 伊万 × 娜杰什卡（跨国之家）" onclick="exportTocGo('2-2-伊万-娜杰什卡-跨国之家');return false;">2.2 伊万 × 娜杰什卡（跨国之家）</a></li><li class="toc-level-3"><a href="#2-3-老达西-哈谢-玛利亚-达西-杰芙琳娜" title="2.3 老达西—哈谢 × 玛利亚—达西 × 杰芙琳娜" onclick="exportTocGo('2-3-老达西-哈谢-玛利亚-达西-杰芙琳娜');return false;">2.3 老达西—哈谢 × 玛利亚—达西 × 杰芙琳娜</a></li><li class="toc-level-3"><a href="#2-4-坤得-依芙琳-金得" title="2.4 坤得 × 依芙琳 → 金得" onclick="exportTocGo('2-4-坤得-依芙琳-金得');return false;">2.4 坤得 × 依芙琳 → 金得</a></li><li class="toc-level-3"><a href="#2-5-鲁尼-妮浩-子女死亡最惨重的一支" title="2.5 鲁尼 × 妮浩（子女死亡最惨重的一支）" onclick="exportTocGo('2-5-鲁尼-妮浩-子女死亡最惨重的一支');return false;">2.5 鲁尼 × 妮浩（子女死亡最惨重的一支）</a></li><li class="toc-level-3"><a href="#2-6-我的两任丈夫与后代" title="2.6 我的两任丈夫与后代" onclick="exportTocGo('2-6-我的两任丈夫与后代');return false;">2.6 我的两任丈夫与后代</a></li><li class="toc-level-3"><a href="#2-7-拉吉米系-无血缘的亲缘" title="2.7 拉吉米系（无血缘的亲缘）" onclick="exportTocGo('2-7-拉吉米系-无血缘的亲缘');return false;">2.7 拉吉米系（无血缘的亲缘）</a></li><li class="toc-level-2"><a href="#三-人物简介对照表" title="三、人物简介对照表" onclick="exportTocGo('三-人物简介对照表');return false;">三、人物简介对照表</a></li><li class="toc-level-3"><a href="#3-1-核心家族成员" title="3.1 核心家族成员" onclick="exportTocGo('3-1-核心家族成员');return false;">3.1 核心家族成员</a></li><li class="toc-level-3"><a href="#3-2-外来者与时代符号" title="3.2 外来者与时代符号" onclick="exportTocGo('3-2-外来者与时代符号');return false;">3.2 外来者与时代符号</a></li><li class="toc-level-2"><a href="#四-婚姻-伴侣关系对照" title="四、婚姻 / 伴侣关系对照" onclick="exportTocGo('四-婚姻-伴侣关系对照');return false;">四、婚姻 / 伴侣关系对照</a></li><li class="toc-level-2"><a href="#五-萨满传承链" title="五、萨满传承链" onclick="exportTocGo('五-萨满传承链');return false;">五、萨满传承链</a></li><li class="toc-level-3"><a href="#5-1-传承顺序" title="5.1 传承顺序" onclick="exportTocGo('5-1-传承顺序');return false;">5.1 传承顺序</a></li><li class="toc-level-3"><a href="#5-2-救一人-失一人-的代价" title="5.2 &quot;救一人，失一人&quot;的代价" onclick="exportTocGo('5-2-救一人-失一人-的代价');return false;">5.2 "救一人，失一人"的代价</a></li><li class="toc-level-2"><a href="#六-死亡方式对照表" title="六、死亡方式对照表" onclick="exportTocGo('六-死亡方式对照表');return false;">六、死亡方式对照表</a></li><li class="toc-level-2"><a href="#七-时代坐标-对照人物命运" title="七、时代坐标（对照人物命运）" onclick="exportTocGo('七-时代坐标-对照人物命运');return false;">七、时代坐标（对照人物命运）</a></li><li class="toc-level-3"><a href="#7-1-三百多年前" title="7.1 三百多年前" onclick="exportTocGo('7-1-三百多年前');return false;">7.1 三百多年前</a></li><li class="toc-level-3"><a href="#7-2-清末民初" title="7.2 清末民初" onclick="exportTocGo('7-2-清末民初');return false;">7.2 清末民初</a></li><li class="toc-level-3"><a href="#7-3-伪满-日军时期-康德年间" title="7.3 伪满 / 日军时期（康德年间）" onclick="exportTocGo('7-3-伪满-日军时期-康德年间');return false;">7.3 伪满 / 日军时期（康德年间）</a></li><li class="toc-level-3"><a href="#7-4-建国后至文革" title="7.4 建国后至文革" onclick="exportTocGo('7-4-建国后至文革');return false;">7.4 建国后至文革</a></li><li class="toc-level-3"><a href="#7-5-改革开放至今" title="7.5 改革开放至今" onclick="exportTocGo('7-5-改革开放至今');return false;">7.5 改革开放至今</a></li><li class="toc-level-2"><a href="#八-全书主题人物映射" title="八、全书主题人物映射" onclick="exportTocGo('八-全书主题人物映射');return false;">八、全书主题人物映射</a></li></ul></div></div></div><div class="export-width-btn" id="exportWidthBtn" title="切换阅读宽度" aria-label="切换阅读宽度"><span class="wicon wicon-expand"><svg class="wicon-svg" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M133.8 115h756.4c20.9 0 37.8 16.9 37.8 37.8v37.8c0 20.9-16.9 37.8-37.8 37.8H133.8c-20.9 0-37.8-16.9-37.8-37.8v-37.8c0-20.9 16.9-37.8 37.8-37.8zM133.8 455.3h491.6c20.9 0 37.8 16.9 37.8 37.8v37.8c0 20.9-16.9 37.8-37.8 37.8H133.8c-20.9 0-37.8-16.9-37.8-37.8v-37.8c0-20.9 16.9-37.8 37.8-37.8zM133.8 795.6h756.4c20.9 0 37.8 16.9 37.8 37.8v37.8c0 20.9-16.9 37.8-37.8 37.8H133.8c-20.9 0-37.8-16.9-37.8-37.8v-37.8c0-20.9 16.9-37.8 37.8-37.8zM757.8 600.7V423.3c0-22 29.2-33.1 46.2-17.5l97.1 88.7c10.6 9.7 10.6 25.3 0 35L804 618.1c-17 15.6-46.2 4.6-46.2-17.4z" fill="currentColor" p-id="6039"></path></svg></span><span class="wicon wicon-restore"><svg class="wicon-svg" viewBox="0 0 1228 1024" xmlns="http://www.w3.org/2000/svg"><path d="M1164.151467 896.750933V1024H0v-127.249067h1164.151467zM1137.322667 0l-297.233067 292.386133 297.233067 292.386134L1228.8 494.7968l-205.824-202.410667L1228.8 89.975467 1137.322667 0zM582.0416 451.447467v127.249066H0V451.447467h582.0416z m0-445.371734v127.249067H0V6.144h582.0416z" fill="currentColor" p-id="7098"></path></svg></span></div>
+<script>
+(function() {
+  var tooltip = document.createElement('div');
+  tooltip.className = 'footnote-tooltip';
+  tooltip.id = 'footnote-tooltip';
+  document.body.appendChild(tooltip);
+  
+  var refs = document.querySelectorAll('.footnote-ref');
+  refs.forEach(function(ref) {
+    ref.addEventListener('click', function(e) {
+      e.preventDefault();
+      var id = this.getAttribute('data-footnote-id');
+      var fn = document.getElementById('fn-' + id);
+      if (fn) {
+        fn.classList.add('highlight');
+        fn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(function() { fn.classList.remove('highlight'); }, 1000);
+      }
+    });
+    
+    ref.addEventListener('mouseenter', function() {
+      var id = this.getAttribute('data-footnote-id');
+      var fn = document.getElementById('fn-' + id);
+      if (fn && tooltip) {
+        var content = fn.querySelector('span');
+        if (content) {
+          tooltip.innerHTML = content.innerHTML;
+        }
+        tooltip.classList.add('show');
+        updateTooltipPosition(this, tooltip);
+      }
+    });
+    
+    ref.addEventListener('mouseleave', function() {
+      if (tooltip) tooltip.classList.remove('show');
+    });
+    
+    ref.addEventListener('mousemove', function(e) {
+      if (tooltip && tooltip.classList.contains('show')) {
+        updateTooltipPosition(this, tooltip);
+      }
+    });
+  });
+  
+  var backRefs = document.querySelectorAll('.footnote-backref');
+  backRefs.forEach(function(back) {
+    back.addEventListener('click', function(e) {
+      e.preventDefault();
+      var id = this.getAttribute('data-footnote-ref');
+      var index = this.getAttribute('data-index');
+      var fnref = document.getElementById('fnref-' + id + '-' + index);
+      if (fnref) {
+        fnref.classList.add('flash');
+        fnref.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(function() { fnref.classList.remove('flash'); }, 500);
+      }
+    });
+  });
+  
+  function updateTooltipPosition(target, tooltipEl) {
+    var rect = target.getBoundingClientRect();
+    var x = rect.left + rect.width / 2 - tooltipEl.offsetWidth / 2;
+    var y = rect.top - tooltipEl.offsetHeight - 8;
+    
+    if (x < 10) x = 10;
+    if (x + tooltipEl.offsetWidth > window.innerWidth - 10) {
+      x = window.innerWidth - tooltipEl.offsetWidth - 10;
+    }
+    if (y < 10) {
+      y = rect.bottom + 8;
+    }
+    
+    tooltipEl.style.left = x + 'px';
+    tooltipEl.style.top = y + 'px';
+  }
+})();
+</script>
+<script>
+(function(){
+  var wBtn = document.getElementById('exportWidthBtn');
+  if (wBtn) {
+    wBtn.addEventListener('click', function(){
+      var body = document.getElementById('write');
+      if (!body) return;
+      var fw = body.classList.toggle('full-width');
+      wBtn.classList.toggle('full', fw);
+    });
+  }
+  var tBtn = document.getElementById('exportTocBtn');
+  if (tBtn) {
+    tBtn.addEventListener('click', function(e){ e.stopPropagation(); tBtn.classList.toggle('open'); });
+    document.addEventListener('click', function(e){
+      if (tBtn.classList.contains('open') && !tBtn.contains(e.target)) tBtn.classList.remove('open');
+    });
+  }
+})();
+function exportTocGo(id){
+  var el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  var b = document.getElementById('exportTocBtn');
+  if (b) b.classList.remove('open');
+}
+
+(function(){
+  function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
+  var ICON = {
+    prev:   '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>',
+    next:   '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>',
+    zoomin: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>',
+    zoomout:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>',
+    rotL:   '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>',
+    rotR:   '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10"/></svg>',
+    reset:  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="1" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="1" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="23" y2="12"/></svg>',
+    pip:    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="14" rx="2"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="17" x2="12" y2="20"/></svg>',
+    close:  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+  };
+  function init(root){
+    if (!root || root.__imgLbBound) return;
+    root.__imgLbBound = true;
+    root.addEventListener('click', function(e){
+      var t = e.target;
+      if (!t || t.tagName !== 'IMG') return;
+      if (t.closest('.katex, .katex-html, .mermaid, pre, code')) return;
+      e.preventDefault();
+      openLb(t, root);
+    });
+  }
+  function openLb(img, root){
+    if (!root) root = (img.closest('#preview') || img.closest('#write')) || document;
+    var ov = document.createElement('div');
+    ov.className = 'img-lightbox-overlay';
+    ov.innerHTML =
+      '<div class="img-lightbox-toolbar">' +
+        '<div class="img-lb-group">' +
+          '<button class="img-lb-btn" data-act="prev" title="上一张 (←)">' + ICON.prev + '</button>' +
+          '<button class="img-lb-btn" data-act="next" title="下一张 (→)">' + ICON.next + '</button>' +
+        '</div>' +
+        '<span class="img-lb-sep"></span>' +
+        '<div class="img-lb-group">' +
+          '<button class="img-lb-btn" data-act="in" title="放大">' + ICON.zoomin + '</button>' +
+          '<button class="img-lb-btn" data-act="out" title="缩小">' + ICON.zoomout + '</button>' +
+          '<button class="img-lb-btn" data-act="rot-left" title="向左旋转 90° ([)">' + ICON.rotL + '</button>' +
+          '<button class="img-lb-btn" data-act="rot-right" title="向右旋转 90° (])">' + ICON.rotR + '</button>' +
+          '<button class="img-lb-btn" data-act="reset" title="重置缩放与旋转">' + ICON.reset + '</button>' +
+        '</div>' +
+        '<span class="img-lb-sep"></span>' +
+        '<div class="img-lb-group">' +
+          '<button class="img-lb-btn" data-act="pip" title="画中画">' + ICON.pip + '</button>' +
+        '</div>' +
+        '<button class="img-lb-btn img-lb-close" data-act="close" title="关闭查看器 (Esc)">' + ICON.close + '</button>' +
+      '</div>' +
+      '<div class="img-lb-counter"></div>' +
+      '<img class="img-lightbox-img">';
+    var im = ov.querySelector('.img-lightbox-img');
+    var counter = ov.querySelector('.img-lb-counter');
+    var prevBtn = ov.querySelector('[data-act="prev"]');
+    var nextBtn = ov.querySelector('[data-act="next"]');
+    document.body.appendChild(ov);
+    requestAnimationFrame(function(){ ov.classList.add('open'); });
+    var scale = 1, tx = 0, ty = 0, rot = 0;
+    function apply(){ im.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ') rotate(' + rot + 'deg)'; }
+    function reset(){ scale = 1; tx = 0; ty = 0; rot = 0; apply(); }
+    function rotate(delta){ rot = (rot + delta) % 360; apply(); }
+    var imgs = Array.prototype.slice.call(root.querySelectorAll('img')).filter(function(el){
+      return !el.closest('.katex, .katex-html, .mermaid, pre, code');
+    });
+    var idx = imgs.indexOf(img); if (idx < 0) idx = 0;
+    function showImg(n){
+      if (!imgs.length) return;
+      idx = (n + imgs.length) % imgs.length;
+      var el = imgs[idx];
+      im.src = el.currentSrc || el.src;
+      im.alt = el.alt || '';
+      counter.textContent = (idx + 1) + ' / ' + imgs.length;
+      prevBtn.classList.toggle('is-disabled', imgs.length <= 1);
+      nextBtn.classList.toggle('is-disabled', imgs.length <= 1);
+      reset();
+    }
+    showImg(idx);
+    function onWheel(e){
+      e.preventDefault();
+      var f = e.deltaY < 0 ? 1.12 : 1 / 1.12;
+      var ns = clamp(scale * f, 0.2, 12);
+      if (ns === scale) return;
+      var r = ov.getBoundingClientRect();
+      var cx = e.clientX - r.left - r.width / 2;
+      var cy = e.clientY - r.top - r.height / 2;
+      tx = cx - (cx - tx) * (ns / scale);
+      ty = cy - (cy - ty) * (ns / scale);
+      scale = ns; apply();
+    }
+    var dragging = false, sx = 0, sy = 0, stx = 0, sty = 0;
+    function onDown(e){
+      if (scale <= 1) return;
+      dragging = true; sx = e.clientX; sy = e.clientY; stx = tx; sty = ty;
+      im.classList.add('grabbing'); e.preventDefault();
+    }
+    function onMove(e){
+      if (!dragging) return;
+      tx = stx + (e.clientX - sx); ty = sty + (e.clientY - sy); apply();
+    }
+    function onUp(){ dragging = false; im.classList.remove('grabbing'); }
+    var tDrag = false, tsx = 0, tsy = 0, ttx = 0, tty = 0;
+    function onTS(e){
+      if (scale <= 1) return;
+      var t0 = e.touches[0]; tDrag = true; tsx = t0.clientX; tsy = t0.clientY; ttx = tx; tty = ty;
+    }
+    function onTM(e){
+      if (!tDrag) return;
+      var t0 = e.touches[0]; tx = ttx + (t0.clientX - tsx); ty = tty + (t0.clientY - tsy); apply();
+    }
+    function onTE(){ tDrag = false; }
+    ov.addEventListener('wheel', onWheel, { passive: false });
+    im.addEventListener('mousedown', onDown);
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    im.addEventListener('touchstart', onTS, { passive: true });
+    im.addEventListener('touchmove', onTM, { passive: true });
+    im.addEventListener('touchend', onTE);
+    ov.querySelector('.img-lightbox-toolbar').addEventListener('click', function(e){
+      var b = e.target.closest('.img-lb-btn'); if (!b) return;
+      var act = b.getAttribute('data-act');
+      if (act === 'in'){ scale = clamp(scale * 1.2, 0.2, 12); apply(); }
+      else if (act === 'out'){ scale = clamp(scale / 1.2, 0.2, 12); apply(); }
+      else if (act === 'rot-left'){ rotate(-90); }
+      else if (act === 'rot-right'){ rotate(90); }
+      else if (act === 'reset'){ reset(); }
+      else if (act === 'prev'){ showImg(idx - 1); }
+      else if (act === 'next'){ showImg(idx + 1); }
+      else if (act === 'close'){ closeLb(); }
+      else if (act === 'pip'){ doPiP(im.src); }
+    });
+    ov.addEventListener('click', function(e){ if (e.target === ov) closeLb(); });
+    function closeLb(){
+      ov.classList.remove('open');
+      setTimeout(function(){ ov.remove(); }, 150);
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+      document.removeEventListener('keydown', onKey);
+    }
+    function onKey(e){
+      if (e.key === 'Escape') { closeLb(); }
+      else if (e.key === 'ArrowLeft') { showImg(idx - 1); }
+      else if (e.key === 'ArrowRight') { showImg(idx + 1); }
+      else if (e.key === '[') { rotate(-90); }
+      else if (e.key === ']') { rotate(90); }
+    }
+    document.addEventListener('keydown', onKey);
+    function doPiP(url){
+      try {
+        if (!document.pictureInPictureEnabled) throw 0;
+        var tmp = new Image();
+        tmp.crossOrigin = 'anonymous';
+        tmp.onload = function(){
+          try {
+            var c = document.createElement('canvas');
+            c.width = tmp.naturalWidth || 800; c.height = tmp.naturalHeight || 600;
+            c.getContext('2d').drawImage(tmp, 0, 0);
+            var v = document.createElement('video');
+            v.muted = true; v.srcObject = c.captureStream();
+            v.play().then(function(){ return v.requestPictureInPicture(); }).catch(function(){ fallbackMini(url); });
+          } catch (err){ fallbackMini(url); }
+        };
+        tmp.onerror = function(){ fallbackMini(url); };
+        tmp.src = url;
+      } catch (err){ fallbackMini(url); }
+    }
+    function fallbackMini(url){
+      if (document.querySelector('.img-lb-mini')) return;
+      var mini = document.createElement('div');
+      mini.className = 'img-lb-mini';
+      mini.innerHTML = '<img src="' + url + '" alt=""><button class="img-lb-mini-close" title="关闭">✕</button>';
+      document.body.appendChild(mini);
+      var mDrag = false, mx = 0, my = 0, mtx = 0, mty = 0;
+      mini.addEventListener('mousedown', function(e){
+        if (e.target.closest('.img-lb-mini-close')) return;
+        mDrag = true; mx = e.clientX; my = e.clientY; mtx = mini.offsetLeft; mty = mini.offsetTop;
+      });
+      window.addEventListener('mousemove', function(e){
+        if (!mDrag) return;
+        mini.style.left = (mtx + e.clientX - mx) + 'px';
+        mini.style.top = (mty + e.clientY - my) + 'px';
+        mini.style.right = 'auto'; mini.style.bottom = 'auto';
+      });
+      window.addEventListener('mouseup', function(){ mDrag = false; });
+      mini.querySelector('.img-lb-mini-close').addEventListener('click', function(e){ e.stopPropagation(); mini.remove(); });
+    }
+  }
+  init(document.getElementById('preview'));
+  init(document.getElementById('write'));
+})();
+
+</script>
+</body>
+</html>
