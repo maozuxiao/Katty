@@ -60,9 +60,11 @@
       --text-body: #725d42;
       --text-secondary: #9f927d;
       --text-muted: #8a7b66;
+      --text-disabled: #c4b89e;
 
       --bg: #f8f8f0;
       --bg-content: rgb(247, 243, 223);
+      --bg-disabled: #f0ece2;
 
       --border: #c4b89e;
       --border-hover: #a89878;
@@ -74,10 +76,16 @@
       --radius-pill: 50px;
 
       --shadow-btn: #bdaea0;
+      --shadow-input: #d4c9b4;
       --focus-yellow: #ffcc00;
+      --focus-yellow-d: #e0b800;
 
       --grass: #7dc395;
       --cream: #fff9e6;
+
+      --success: #6fba2c;
+      --warning: #f5c31c;
+      --error: #e05a5a;
 
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
       --dur-fast: 0.15s;
@@ -156,6 +164,7 @@
     .brand-name { font-size: 1.15rem; text-shadow: 0 2px 1px rgba(0, 0, 0, 0.28); }
     .date-chip {
       display: inline-flex; align-items: center; gap: 8px;
+      margin-left: auto;
       padding: 8px 16px;
       border-radius: var(--radius-pill);
       background: rgba(255, 249, 230, 0.92);
@@ -368,13 +377,87 @@
     .doc-gh:hover { color: var(--primary-active); border-bottom-color: currentColor; }
 
     /* ===================================================================
-       页脚：海浪装饰
+       页脚：海浪装饰（官方 Footer seamless 同款：保持原始比例横向无缝平铺，
+       任何视口宽度都不会裁切波峰；素材两端均为波峰收口，可无缝衔接）
        =================================================================== */
     .footer { position: relative; padding-top: 26px; background: var(--bg); }
     .footer-sea {
-      height: 150px;
-      background: url('assets/img/footer-sea.svg') center bottom/cover no-repeat;
+      height: 186px;
+      background: url('assets/img/footer-sea.svg') left bottom / auto 100% repeat-x;
     }
+    /* 版权栏：官方 Footer 组件规范（12px / 居中），叠放在海面留白处 */
+    .footer-copy {
+      position: absolute;
+      left: 0; right: 0; bottom: 10px;
+      margin: 0;
+      color: var(--text);
+      opacity: 0.75;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* ===================================================================
+       工具箱：header 内的可折叠 tab（对齐官方 Collapse：18px 卡片 +
+       grid-template-rows 0fr→1fr 纯 CSS 展开，无需 JS 量高）
+       =================================================================== */
+    .tool-dock { position: relative; flex: none; }
+    .tool-tab {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 10px 8px 16px;
+      border: 0; border-radius: var(--radius-pill);
+      background: rgba(255, 249, 230, 0.92); color: var(--text);
+      font-family: inherit; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 2px 4px 0 rgba(61, 52, 40, 0.14);
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    }
+    .tool-tab:hover { transform: translateY(-1px); box-shadow: 0 3px 10px 0 rgba(61, 52, 40, 0.2); }
+    .tool-tab .tool-icon {
+      width: 14px; height: 14px; object-fit: contain;
+      animation: leafWiggle 3s var(--ease) infinite; transform-origin: 50% 90%;
+    }
+    .tool-tab:hover .tool-icon { animation-duration: 1.2s; }
+    .chev-circle {
+      flex: none; width: 22px; height: 22px;
+      display: grid; place-items: center;
+      background: var(--primary); border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(25, 200, 185, 0.3);
+    }
+    .chev-circle .chev {
+      width: 7px; height: 7px;
+      border-top: 2.5px solid #fff; border-right: 2.5px solid #fff;
+      transform: rotate(135deg);
+      transition: transform var(--dur) var(--ease);
+    }
+    .tool-dock.open .chev-circle .chev { transform: rotate(-45deg); }
+    .tool-body {
+      position: absolute; top: calc(100% + 10px); right: 0; z-index: 30;
+      width: min(320px, calc(100vw - 28px));
+      display: grid; grid-template-rows: 0fr;
+      border: 2px solid var(--border-hover); border-radius: 18px;
+      background: var(--bg-content);
+      box-shadow: 0 8px 18px rgba(61, 52, 40, 0.16);
+      opacity: 0; visibility: hidden;
+      transition: grid-template-rows 0.3s var(--ease), opacity 0.25s var(--ease), visibility 0s linear 0.3s;
+    }
+    .tool-dock.open .tool-body {
+      grid-template-rows: 1fr; opacity: 1; visibility: visible;
+      transition: grid-template-rows 0.3s var(--ease), opacity 0.25s var(--ease);
+    }
+    .tool-body > div { overflow: hidden; }
+    .tool-list { padding: 4px 10px 10px; font-size: 14px; line-height: 1.7; }
+    .tool-link {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 12px; border-radius: 14px;
+      text-decoration: none; color: var(--text-body);
+      transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+    }
+    .tool-link:hover { background: var(--primary-bg); color: var(--primary-active); }
+    .tool-link img { width: 22px; height: 22px; object-fit: contain; flex: none; }
+    .tool-link b { display: block; font-size: 0.92rem; font-weight: 700; color: var(--text); }
+    .tool-link em { display: block; font-style: normal; font-size: 0.78rem; color: var(--text-secondary); }
+    .tool-link:hover b { color: var(--primary-active); }
 
     /* ===================================================================
        响应式
@@ -392,7 +475,8 @@
       .section-heading { gap: 14px; }
       .doc-grid { grid-template-columns: 1fr; gap: 14px; }
       .doc-card { min-height: 0; }
-      .footer-sea { height: 96px; }
+      .footer-sea { height: 120px; }
+      .date-chip { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -413,6 +497,27 @@
         <span class="brand-name">Katty / journal</span>
       </a>
       <time class="date-chip" id="today" aria-label="今天的日期"></time>
+
+      <div class="tool-dock" id="tool-dock">
+        <button class="tool-tab" type="button" id="tool-tab" aria-expanded="false" aria-controls="tool-body">
+          <img class="tool-icon" src="assets/img/icon-leaf.png" alt="" aria-hidden="true">
+          <span class="tool-name">工具箱</span>
+          <span class="chev-circle" aria-hidden="true"><span class="chev"></span></span>
+        </button>
+        <div class="tool-body" id="tool-body">
+          <div>
+            <nav class="tool-list" aria-label="工具列表">
+              <a class="tool-link" href="tools/md-to-island.html">
+                <img src="assets/img/icon-page.svg" alt="" aria-hidden="true">
+                <span>
+                  <b>Markdown → 岛屿文档</b>
+                  <em>导入本地 .md，导出岛上风格的 HTML</em>
+                </span>
+              </a>
+            </nav>
+          </div>
+        </div>
+      </div>
     </header>
 
     <section class="hero">
@@ -455,14 +560,15 @@
 
     <footer class="footer">
       <div class="footer-sea" aria-hidden="true"></div>
+      <p class="footer-copy">© <span id="copyright-year">2026</span> Katty · All Rights Reserved.</p>
     </footer>
   </div>
 
   <script>
     const REPOSITORY = 'maozuxiao/Katty';
     const DOCS_API = `https://api.github.com/repos/${REPOSITORY}/contents/docs`;
-    // Markdown 文档统一交给 KattyBB 编辑器打开（Mermaid、公式、警告框、脚注等比 GitHub 原生渲染更完整）
-    const MD_EDITOR = 'https://maozuxiao.github.io/Streamax/Tools/KattyBB_MD_Editor/index.html';
+    // Markdown 文档交给本仓库的转换工具渲染（?file= 只读渲染，默认放大预览）
+    const MD_VIEWER = 'tools/md-to-island.html';
     const ICON_PAGE = 'assets/img/icon-page.svg';
     const ICON_CRITTERPEDIA = 'assets/img/icon-critterpedia.svg';
     const grid = document.querySelector('#doc-grid');
@@ -474,6 +580,24 @@
     document.querySelector('#today').textContent = new Intl.DateTimeFormat('zh-CN', {
       year: 'numeric', month: 'long', day: 'numeric'
     }).format(new Date());
+    document.querySelector('#copyright-year').textContent = new Date().getFullYear();
+
+    const toolDock = document.querySelector('#tool-dock');
+    const toolTab = document.querySelector('#tool-tab');
+    function setToolOpen(open) {
+      toolDock.classList.toggle('open', open);
+      toolTab.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    toolTab.addEventListener('click', e => {
+      e.stopPropagation();
+      setToolOpen(!toolDock.classList.contains('open'));
+    });
+    document.addEventListener('click', e => {
+      if (toolDock.classList.contains('open') && !toolDock.contains(e.target)) setToolOpen(false);
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') setToolOpen(false);
+    });
 
     function formatDate(value) {
       if (!value) return '日期未知';
@@ -525,9 +649,10 @@
       // 依次浮现：按渲染顺序递增延迟
       card.style.animationDelay = `${Math.min(index * 0.07, 0.7)}s`;
       // download_url 的中文未编码，只需 encodeURIComponent 一次，切勿重复编码
+      // docs/ 下的 md 用相对路径传给转换工具（工具页在 tools/，故补 ../）
       const mainHref = isHtml
         ? `./${file.path}`
-        : `${MD_EDITOR}?file=${encodeURIComponent(file.download_url)}&ro=1`;
+        : `${MD_VIEWER}?file=${encodeURIComponent('../' + file.path)}`;
       card.innerHTML = `
         <span class="doc-topline">
           <span class="doc-type ${isHtml ? '' : 'md'}">
